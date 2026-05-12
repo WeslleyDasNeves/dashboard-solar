@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Solar - Real vs PVsyst</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #343a40; margin: 0; padding: 30px; }
+    .container { max-width: 1050px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    h2 { border-bottom: 2px solid #2980b9; padding-bottom: 15px; color: #2c3e50; margin-top: 0; display: flex; justify-content: space-between; align-items: center;}
+    
+    .tabs { display: flex; gap: 10px; }
+    .tab-btn { background: #e9ecef; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; color: #495057; transition: 0.3s; }
+    .tab-btn:hover { background: #dee2e6; }
+    .tab-btn.active { background: #2980b9; color: white; }
+
+    .controls { display: flex; gap: 20px; align-items: center; margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef; flex-wrap: wrap;}
+    .control-group { flex: 1; min-width: 200px; }
+    label { font-weight: 600; color: #495057; display: block; margin-bottom: 8px; font-size: 14px;}
+    select { padding: 10px; border: 1px solid #ced4da; border-radius: 5px; font-size: 14px; width: 100%; box-sizing: border-box; background-color: #fff; cursor: pointer;}
+    select:focus { outline: none; border-color: #2980b9; box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2); }
+    
+    .chart-container { position: relative; height: 60vh; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>
+      Acompanhamento de Geração x Meta
+      <div class="tabs">
+        <button id="btnDiario" class="tab-btn active" onclick="mudarModo('diario')">Visão Diária</button>
+        <button id="btn7Dias" class="tab-btn" onclick="mudarModo('7')">Acumulado 7 Dias</button>
+        <button id="btn30Dias" class="tab-btn" onclick="mudarModo('30')">Acumulado 30 Dias</button>
+      </div>
+    </h2>
+    
+    <div class="controls">
+      <div class="control-group" id="grupoUsina">
+        <label for="usinaSelect">Usina Agrupada:</label>
+        <select id="usinaSelect"><option value="">Carregando dados...</option></select>
+      </div>
+      <div class="control-group" id="grupoMes">
+        <label for="mesSelect">Mês/Ano:</label>
+        <select id="mesSelect"><option value="">Carregando dados...</option></select>
+      </div>
+    </div>
+    
+    <div class="chart-container">
+      <canvas id="grafico"></canvas>
+    </div>
+  </div>
+
+  <script>
+    let chartInstance = null;
+    let dadosGerais = [];
+    let modoAtual = 'diario';
+
+    // Lê o arquivo CSV automaticamente assim que o site abrir
+    async function carregarDadosAutomaticos() {
+      try {
+        const resposta = await fetch('dados_completos_dashboard.csv');
+        
+        if (!resposta.ok) {
+          throw new Error('Arquivo não encontrado');
+        }
+        
+        const textoCSV = await resposta.text();
+        processarCSV(textoCSV);
+      } catch (erro) {
+        console.error("Erro ao ler o CSV:", erro);
+        alert("Erro ao carregar os dados. Certifique-se de que o arquivo 'dados_completos_dashboard.csv' está salvo na mesma pasta do site.");
+      }
+    }
+
+    function processarCSV(text) {
+      const linhas = text.trim().split(/\r?\n/).slice(1);
+      dadosGerais = [];
+
+      linhas.forEach(linha => {
+        const separador = linha.includes(';') ? ';' : ',';
+        const partes = linha.split(separador);
+
+        if (partes.length >= 4) {
+          const dataStr = partes[0].trim();
+          const usina = partes[1].trim();
+          let valReal = parseFloat(partes[2].trim().replace(',', '.'));
+          let valPv = parseFloat(partes[3].trim().replace(',', '.'));
+
+          if (!isNaN(valReal) && !isNaN(valPv) && dataStr.includes('/')) {
+            const [dia, mes, ano] = dataStr.split('/');
+            const dataObj = new Date(ano, mes - 1, dia); 
+            const mesAno = `${mes}/${ano}`;
+
+            dadosGerais.push({ 
+              dataLabel: dataStr, dataObj: dataObj, mesAno: mesAno, 
+              usina: usina, real: valReal, pvsyst: valPv
+            });
+          }
+        }
+      });
+      preencherFiltros();
+    }
+
+    function preencherFiltros() {
+      const usinas = [...new Set(dadosGerais.map(d => d.usina))].sort();
+      const selectUsina = document.getElementById('usinaSelect');
+      selectUsina.innerHTML = '';
+      usinas.forEach(u => selectUsina.appendChild(new Option(u, u)));
+
+      const meses = [...new Set(dadosGerais.map(d => d.mesAno))].sort((a, b) => {
+        const [mesA, anoA] = a.split('/');
+        const [mesB, anoB] = b.split('/');
+        return new Date(anoA, mesA - 1) - new Date(anoB, mesB - 1);
+      });
+      const selectMes = document.getElementById('mesSelect');
+      selectMes.innerHTML = '';
+      meses.forEach(m => selectMes.appendChild(new Option(m, m)));
+
+      if (usinas.length > 0 && meses.length > 0) {
+        atualizarGrafico();
+      }
+    }
+
+    function mudarModo(modo) {
+      if (dadosGerais.length === 0) return;
+      modoAtual = modo;
+      
+      document.getElementById('btnDiario').classList.remove('active');
+      document.getElementById('btn7Dias').classList.remove('active');
+      document.getElementById('btn30Dias').classList.remove('active');
+      
+      if (modo === 'diario') document.getElementById('btnDiario').classList.add('active');
+      if (modo === '7') document.getElementById('btn7Dias').classList.add('active');
+      if (modo === '30') document.getElementById('btn30Dias').classList.add('active');
+
+      const displayFiltros = (modo === 'diario') ? 'block' : 'none';
+      document.getElementById('grupoUsina').style.display = displayFiltros;
+      document.getElementById('grupoMes').style.display = displayFiltros;
+
+      atualizarGrafico();
+    }
+
+    const tooltipVariação = {
+      callbacks: {
+        footer: function(tooltipItems) {
+          if (tooltipItems.length >= 2) {
+            let real = 0;
+            let pv = 0;
+            
+            tooltipItems.forEach(item => {
+              if (item.datasetIndex === 0) real = item.parsed.y; 
+              if (item.datasetIndex === 1) pv = item.parsed.y;   
+            });
+
+            if (pv > 0) {
+              const variacao = ((real - pv) / pv) * 100;
+              const icone = variacao >= 0 ? '🟢' : '🔴';
+              const sinal = variacao > 0 ? '+' : '';
+              return `\n${icone} Desempenho: ${sinal}${variacao.toFixed(2)}%`;
+            }
+          }
+          return '';
+        }
+      }
+    };
+
+    function atualizarGrafico() {
+      if (chartInstance) chartInstance.destroy();
+      const ctx = document.getElementById('grafico').getContext('2d');
+
+      if (modoAtual === 'diario') {
+        const uSel = document.getElementById('usinaSelect').value;
+        const mSel = document.getElementById('mesSelect').value;
+        
+        let f = dadosGerais.filter(d => d.usina === uSel && d.mesAno === mSel);
+        f.sort((a, b) => a.dataObj - b.dataObj);
+
+        chartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: f.map(d => d.dataLabel),
+            datasets: [
+              { label: 'Geração Real', data: f.map(d => d.real), borderColor: '#2980b9', backgroundColor: 'rgba(41, 128, 185, 0.15)', borderWidth: 3, pointRadius: 4, fill: true, tension: 0.2 },
+              { label: 'Meta PVsyst', data: f.map(d => d.pvsyst), borderColor: '#e74c3c', borderWidth: 2, borderDash: [5, 5], pointRadius: 0, fill: false, tension: 0 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: { tooltip: tooltipVariação },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Diária' } } }
+          }
+        });
+
+      } else {
+        const dias = parseInt(modoAtual);
+        const maxDate = new Date(Math.max(...dadosGerais.map(d => d.dataObj)));
+        const dataCorte = new Date(maxDate);
+        dataCorte.setDate(maxDate.getDate() - dias + 1);
+
+        const dadosRecentes = dadosGerais.filter(d => d.dataObj >= dataCorte && d.dataObj <= maxDate);
+
+        const soma = {};
+        dadosRecentes.forEach(d => {
+          if (!soma[d.usina]) soma[d.usina] = { real: 0, pv: 0 };
+          soma[d.usina].real += d.real;
+          soma[d.usina].pv += d.pvsyst;
+        });
+
+        const usinasLabels = Object.keys(soma).sort();
+        const strCorte = dataCorte.toLocaleDateString('pt-BR');
+        const strMax = maxDate.toLocaleDateString('pt-BR');
+
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: usinasLabels,
+            datasets: [
+              { label: 'Realizado', data: usinasLabels.map(u => soma[u].real.toFixed(2)), backgroundColor: '#2980b9', borderWidth: 1 },
+              { label: 'Meta PVsyst', data: usinasLabels.map(u => soma[u].pv.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false }, 
+            plugins: { 
+              title: { display: true, text: `Acumulado ${dias} Dias: ${strCorte} até ${strMax}`, font: { size: 15 } },
+              tooltip: tooltipVariação 
+            },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Acumulada' } } }
+          }
+        });
+      }
+    }
+
+    // Inicia tudo
+    document.getElementById('usinaSelect').addEventListener('change', atualizarGrafico);
+    document.getElementById('mesSelect').addEventListener('change', atualizarGrafico);
+    window.onload = carregarDadosAutomaticos;
+  </script>
+</body>
+</html>
