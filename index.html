@@ -7,13 +7,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #343a40; margin: 0; padding: 30px; }
-    .container { max-width: 1050px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    h2 { border-bottom: 2px solid #2980b9; padding-bottom: 15px; color: #2c3e50; margin-top: 0; display: flex; justify-content: space-between; align-items: center;}
+    .container { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    h2 { border-bottom: 2px solid #2980b9; padding-bottom: 15px; color: #2c3e50; margin-top: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
     
-    .tabs { display: flex; gap: 10px; }
-    .tab-btn { background: #e9ecef; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; color: #495057; transition: 0.3s; }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap;}
+    .tab-btn { background: #e9ecef; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; color: #495057; transition: 0.3s; font-size: 13px;}
     .tab-btn:hover { background: #dee2e6; }
     .tab-btn.active { background: #2980b9; color: white; }
+    
+    .visao-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e9ecef; padding-bottom: 15px;}
+    .visao-btn { background: white; border: 2px solid #2980b9; color: #2980b9; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 13px;}
+    .visao-btn:hover { background: #f4f6f9; }
+    .visao-btn.active { background: #2980b9; color: white; }
 
     .controls { display: flex; gap: 20px; align-items: center; margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef; flex-wrap: wrap;}
     .control-group { flex: 1; min-width: 200px; }
@@ -29,20 +34,33 @@
     <h2>
       Acompanhamento de Geração x Meta
       <div class="tabs">
-        <button id="btnDiario" class="tab-btn active" onclick="mudarModo('diario')">Visão Diária</button>
-        <button id="btn7Dias" class="tab-btn" onclick="mudarModo('7')">Acumulado 7 Dias</button>
-        <button id="btn30Dias" class="tab-btn" onclick="mudarModo('30')">Acumulado 30 Dias</button>
+        <button id="btnDiario" class="tab-btn active" onclick="mudarModo('diario')">📈 Evolução do Mês</button>
+        <button id="btnComparativo" class="tab-btn" onclick="mudarModo('comparativo')">📊 Comparativo Diário</button>
+        <button id="btn7Dias" class="tab-btn" onclick="mudarModo('7')">📅 Acumulado 7 Dias</button>
+        <button id="btn30Dias" class="tab-btn" onclick="mudarModo('30')">📆 Acumulado 30 Dias</button>
       </div>
     </h2>
+
+    <div class="visao-tabs">
+      <button id="btnVisaoAgrupada" class="visao-btn active" onclick="mudarTipoVisao('agrupada')">🏢 Usinas Agrupadas</button>
+      <button id="btnVisaoIndividual" class="visao-btn" onclick="mudarTipoVisao('individual')">🔎 Usinas Individuais</button>
+    </div>
     
     <div class="controls">
+      <!-- Filtros para a visão de Linha (Evolução) -->
       <div class="control-group" id="grupoUsina">
-        <label for="usinaSelect">Usina Agrupada:</label>
+        <label id="labelUsina" for="usinaSelect">Usina:</label>
         <select id="usinaSelect"><option value="">Carregando dados...</option></select>
       </div>
       <div class="control-group" id="grupoMes">
         <label for="mesSelect">Mês/Ano:</label>
         <select id="mesSelect"><option value="">Carregando dados...</option></select>
+      </div>
+      
+      <!-- Filtro NOVO para a visão de Barras Diárias (Comparativo) -->
+      <div class="control-group" id="grupoDataExata" style="display: none;">
+        <label for="dataSelect">Data Específica:</label>
+        <select id="dataSelect"><option value="">Carregando dados...</option></select>
       </div>
     </div>
     
@@ -55,21 +73,17 @@
     let chartInstance = null;
     let dadosGerais = [];
     let modoAtual = 'diario';
+    let tipoVisaoAtual = 'agrupada'; 
 
-    // Lê o arquivo CSV automaticamente assim que o site abrir
     async function carregarDadosAutomaticos() {
       try {
-        const resposta = await fetch('dados_completos_dashboard.csv');
-        
-        if (!resposta.ok) {
-          throw new Error('Arquivo não encontrado');
-        }
-        
+        const resposta = await fetch('teste.csv'); 
+        if (!resposta.ok) throw new Error('Arquivo não encontrado');
         const textoCSV = await resposta.text();
         processarCSV(textoCSV);
       } catch (erro) {
         console.error("Erro ao ler o CSV:", erro);
-        alert("Erro ao carregar os dados. Certifique-se de que o arquivo 'dados_completos_dashboard.csv' está salvo na mesma pasta do site.");
+        alert("Erro ao carregar os dados. Certifique-se de que o arquivo 'teste.csv' está salvo na mesma pasta do site.");
       }
     }
 
@@ -102,12 +116,36 @@
       preencherFiltros();
     }
 
+    function mudarTipoVisao(tipo) {
+      tipoVisaoAtual = tipo;
+      document.getElementById('btnVisaoAgrupada').classList.remove('active');
+      document.getElementById('btnVisaoIndividual').classList.remove('active');
+      
+      if (tipo === 'agrupada') {
+        document.getElementById('btnVisaoAgrupada').classList.add('active');
+        document.getElementById('labelUsina').innerText = "Usina Agrupada:";
+      } else {
+        document.getElementById('btnVisaoIndividual').classList.add('active');
+        document.getElementById('labelUsina').innerText = "Inversor Individual:";
+      }
+      preencherFiltros();
+    }
+
     function preencherFiltros() {
-      const usinas = [...new Set(dadosGerais.map(d => d.usina))].sort();
+      let usinasFiltradas = dadosGerais.map(d => d.usina);
+      if (tipoVisaoAtual === 'agrupada') {
+        usinasFiltradas = usinasFiltradas.filter(u => !u.includes('(Individual)'));
+      } else {
+        usinasFiltradas = usinasFiltradas.filter(u => u.includes('(Individual)'));
+      }
+
+      // Preenche Usinas
+      const usinas = [...new Set(usinasFiltradas)].sort();
       const selectUsina = document.getElementById('usinaSelect');
       selectUsina.innerHTML = '';
       usinas.forEach(u => selectUsina.appendChild(new Option(u, u)));
 
+      // Preenche Meses
       const meses = [...new Set(dadosGerais.map(d => d.mesAno))].sort((a, b) => {
         const [mesA, anoA] = a.split('/');
         const [mesB, anoB] = b.split('/');
@@ -116,6 +154,19 @@
       const selectMes = document.getElementById('mesSelect');
       selectMes.innerHTML = '';
       meses.forEach(m => selectMes.appendChild(new Option(m, m)));
+
+      // Preenche Datas Exatas para o Comparativo Diário
+      const datasExatas = [...new Set(dadosGerais.map(d => d.dataLabel))].sort((a, b) => {
+        const [diaA, mesA, anoA] = a.split('/');
+        const [diaB, mesB, anoB] = b.split('/');
+        return new Date(anoA, mesA - 1, diaA) - new Date(anoB, mesB - 1, diaB);
+      });
+      const selectData = document.getElementById('dataSelect');
+      selectData.innerHTML = '';
+      datasExatas.forEach(d => selectData.appendChild(new Option(d, d)));
+      
+      // Seleciona o dia mais recente por padrão
+      if(datasExatas.length > 0) selectData.value = datasExatas[datasExatas.length - 1];
 
       if (usinas.length > 0 && meses.length > 0) {
         atualizarGrafico();
@@ -127,16 +178,19 @@
       modoAtual = modo;
       
       document.getElementById('btnDiario').classList.remove('active');
+      document.getElementById('btnComparativo').classList.remove('active');
       document.getElementById('btn7Dias').classList.remove('active');
       document.getElementById('btn30Dias').classList.remove('active');
       
       if (modo === 'diario') document.getElementById('btnDiario').classList.add('active');
+      if (modo === 'comparativo') document.getElementById('btnComparativo').classList.add('active');
       if (modo === '7') document.getElementById('btn7Dias').classList.add('active');
       if (modo === '30') document.getElementById('btn30Dias').classList.add('active');
 
-      const displayFiltros = (modo === 'diario') ? 'block' : 'none';
-      document.getElementById('grupoUsina').style.display = displayFiltros;
-      document.getElementById('grupoMes').style.display = displayFiltros;
+      // Controla quais caixinhas de filtro aparecem dependendo do botão clicado
+      document.getElementById('grupoUsina').style.display = (modo === 'diario') ? 'block' : 'none';
+      document.getElementById('grupoMes').style.display = (modo === 'diario') ? 'block' : 'none';
+      document.getElementById('grupoDataExata').style.display = (modo === 'comparativo') ? 'block' : 'none';
 
       atualizarGrafico();
     }
@@ -145,19 +199,18 @@
       callbacks: {
         footer: function(tooltipItems) {
           if (tooltipItems.length >= 2) {
-            let real = 0;
-            let pv = 0;
-            
+            let real = 0; let pv = 0;
             tooltipItems.forEach(item => {
               if (item.datasetIndex === 0) real = item.parsed.y; 
               if (item.datasetIndex === 1) pv = item.parsed.y;   
             });
-
             if (pv > 0) {
               const variacao = ((real - pv) / pv) * 100;
               const icone = variacao >= 0 ? '🟢' : '🔴';
               const sinal = variacao > 0 ? '+' : '';
               return `\n${icone} Desempenho: ${sinal}${variacao.toFixed(2)}%`;
+            } else {
+              return `\nℹ️ Sem meta para este inversor isolado.`;
             }
           }
           return '';
@@ -170,6 +223,7 @@
       const ctx = document.getElementById('grafico').getContext('2d');
 
       if (modoAtual === 'diario') {
+        // --- 1. GRÁFICO DE LINHA (Evolução do Mês) ---
         const uSel = document.getElementById('usinaSelect').value;
         const mSel = document.getElementById('mesSelect').value;
         
@@ -193,13 +247,47 @@
           }
         });
 
+      } else if (modoAtual === 'comparativo') {
+        // --- 2. GRÁFICO DE BARRAS (Comparativo de 1 Dia Específico) ---
+        const dataSel = document.getElementById('dataSelect').value;
+        
+        let f = dadosGerais.filter(d => d.dataLabel === dataSel);
+        if (tipoVisaoAtual === 'agrupada') f = f.filter(d => !d.usina.includes('(Individual)'));
+        else f = f.filter(d => d.usina.includes('(Individual)'));
+        
+        // Ordena pelo nome da Usina em ordem alfabética
+        f.sort((a, b) => a.usina.localeCompare(b.usina));
+
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: f.map(d => d.usina),
+            datasets: [
+              { label: 'Realizado', data: f.map(d => d.real.toFixed(2)), backgroundColor: '#2980b9', borderWidth: 1 },
+              { label: 'Meta PVsyst', data: f.map(d => d.pvsyst.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false }, 
+            plugins: { 
+              title: { display: true, text: `Comparativo Diário: ${dataSel}`, font: { size: 15 } },
+              tooltip: tooltipVariação 
+            },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração do Dia' } } }
+          }
+        });
+
       } else {
+        // --- 3. GRÁFICO DE BARRAS (Acumulados de 7 e 30 dias) ---
         const dias = parseInt(modoAtual);
         const maxDate = new Date(Math.max(...dadosGerais.map(d => d.dataObj)));
         const dataCorte = new Date(maxDate);
         dataCorte.setDate(maxDate.getDate() - dias + 1);
 
-        const dadosRecentes = dadosGerais.filter(d => d.dataObj >= dataCorte && d.dataObj <= maxDate);
+        let dadosRecentes = dadosGerais.filter(d => d.dataObj >= dataCorte && d.dataObj <= maxDate);
+        if (tipoVisaoAtual === 'agrupada') dadosRecentes = dadosRecentes.filter(d => !d.usina.includes('(Individual)'));
+        else dadosRecentes = dadosRecentes.filter(d => d.usina.includes('(Individual)'));
 
         const soma = {};
         dadosRecentes.forEach(d => {
@@ -234,9 +322,10 @@
       }
     }
 
-    // Inicia tudo
+    // Eventos para atualizar automaticamente
     document.getElementById('usinaSelect').addEventListener('change', atualizarGrafico);
     document.getElementById('mesSelect').addEventListener('change', atualizarGrafico);
+    document.getElementById('dataSelect').addEventListener('change', atualizarGrafico);
     window.onload = carregarDadosAutomaticos;
   </script>
 </body>
