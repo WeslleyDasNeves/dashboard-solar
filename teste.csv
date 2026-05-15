@@ -199,6 +199,10 @@ Data;Usina;Geracao_Real;PVsyst
 13/05/2026;COLATINA 2;8,7405;10,53
 13/05/2026;PANCAS;12,551028;15,85
 13/05/2026;SM F47;5,0998;4,86
+14/05/2026;COLATINA 1;14,5524;14,96
+14/05/2026;COLATINA 2;10,1722;10,53
+14/05/2026;PANCAS;16,7104;15,85
+14/05/2026;SM F47;5,0998;4,86
 25/03/2026;Colatina 1 (Individual);1,99;5,82
 26/03/2026;Colatina 1 (Individual);3,7;5,82
 27/03/2026;Colatina 1 (Individual);5,51;5,82
@@ -249,6 +253,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Colatina 1 (Individual);4,8674;4,99
 12/05/2026;Colatina 1 (Individual);2,549448;4,99
 13/05/2026;Colatina 1 (Individual);4,18392;4,99
+14/05/2026;Colatina 1 (Individual);4,8674;4,99
 25/03/2026;Colatina 2 (Individual);3,95;5,82
 26/03/2026;Colatina 2 (Individual);4,77;5,82
 27/03/2026;Colatina 2 (Individual);6,28;5,82
@@ -299,6 +304,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Colatina 2 (Individual);6,8406;4,99
 12/05/2026;Colatina 2 (Individual);2,6043;4,99
 13/05/2026;Colatina 2 (Individual);4,1553;4,99
+14/05/2026;Colatina 2 (Individual);4,7442;4,99
 25/03/2026;Colatina 3 (Individual);4,14;5,82
 26/03/2026;Colatina 3 (Individual);5,04;5,82
 27/03/2026;Colatina 3 (Individual);6,34;5,82
@@ -349,6 +355,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Colatina 3 (Individual);7,0268;4,99
 12/05/2026;Colatina 3 (Individual);2,665;4,99
 13/05/2026;Colatina 3 (Individual);4,2975;4,99
+14/05/2026;Colatina 3 (Individual);4,9408;4,99
 25/03/2026;Colatina 4 (Individual);4,09;6,04
 26/03/2026;Colatina 4 (Individual);4,85;6,04
 27/03/2026;Colatina 4 (Individual);6,54;6,04
@@ -399,6 +406,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Colatina 4 (Individual);7,0885;5,27
 12/05/2026;Colatina 4 (Individual);2,7998;5,27
 13/05/2026;Colatina 4 (Individual);4,3537;5,27
+14/05/2026;Colatina 4 (Individual);4,9738;5,27
 25/03/2026;Colatina 5 (Individual);4,18;6,04
 26/03/2026;Colatina 5 (Individual);5,01;6,04
 27/03/2026;Colatina 5 (Individual);6,63;6,04
@@ -449,6 +457,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Colatina 5 (Individual);7,0086;5,27
 12/05/2026;Colatina 5 (Individual);2,8864;5,27
 13/05/2026;Colatina 5 (Individual);4,3868;5,27
+14/05/2026;Colatina 5 (Individual);5,1984;5,27
 25/03/2026;Pancas 1 (Individual);3,29;6,06
 26/03/2026;Pancas 1 (Individual);4,79;6,06
 27/03/2026;Pancas 1 (Individual);6,36;6,06
@@ -499,6 +508,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Pancas 1 (Individual);7,0103;5,28
 12/05/2026;Pancas 1 (Individual);2,424672;5,28
 13/05/2026;Pancas 1 (Individual);4,120128;5,28
+14/05/2026;Pancas 1 (Individual);5,5382;5,28
 25/03/2026;Pancas 2 (Individual);3,84;6,06
 26/03/2026;Pancas 2 (Individual);5,43;6,06
 27/03/2026;Pancas 2 (Individual);7,4;6,06
@@ -549,6 +559,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Pancas 2 (Individual);7,0777;5,28
 12/05/2026;Pancas 2 (Individual);2,5011;5,28
 13/05/2026;Pancas 2 (Individual);4,229;5,28
+14/05/2026;Pancas 2 (Individual);5,6332;5,28
 25/03/2026;Pancas 3 (Individual);3,75;6,06
 26/03/2026;Pancas 3 (Individual);5,46;6,06
 27/03/2026;Pancas 3 (Individual);7,46;6,06
@@ -599,6 +610,7 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;Pancas 3 (Individual);7,1111;5,28
 12/05/2026;Pancas 3 (Individual);2,4984;5,28
 13/05/2026;Pancas 3 (Individual);4,2019;5,28
+14/05/2026;Pancas 3 (Individual);5,539;5,28
 25/03/2026;SM F47 (Individual);0;5,85
 26/03/2026;SM F47 (Individual);5,11;5,85
 27/03/2026;SM F47 (Individual);1,56;5,85
@@ -649,3 +661,4 @@ Data;Usina;Geracao_Real;PVsyst
 11/05/2026;SM F47 (Individual);5,689;4,86
 12/05/2026;SM F47 (Individual);2,6679;4,86
 13/05/2026;SM F47 (Individual);5,0998;4,86
+14/05/2026;SM F47 (Individual);5,0998;4,86
