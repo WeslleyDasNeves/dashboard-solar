@@ -1,0 +1,748 @@
+Data;Usina;Geracao_Real;PVsyst
+25/03/2026;COLATINA 1;10,08;17,46
+25/03/2026;COLATINA 2;8,27;12,07
+25/03/2026;PANCAS;10,879999999999999;18,19
+25/03/2026;SM F47;0,0;5,85
+26/03/2026;COLATINA 1;13,51;17,46
+26/03/2026;COLATINA 2;9,86;12,07
+26/03/2026;PANCAS;15,68;18,19
+26/03/2026;SM F47;5,11;5,85
+27/03/2026;COLATINA 1;18,13;17,46
+27/03/2026;COLATINA 2;13,17;12,07
+27/03/2026;PANCAS;21,22;18,19
+27/03/2026;SM F47;1,56;5,85
+28/03/2026;COLATINA 1;15,77;17,46
+28/03/2026;COLATINA 2;12,559999999999999;12,07
+28/03/2026;PANCAS;17,92;18,19
+28/03/2026;SM F47;5,19;5,85
+29/03/2026;COLATINA 1;17,44;17,46
+29/03/2026;COLATINA 2;13,760000000000002;12,07
+29/03/2026;PANCAS;18,95;18,19
+29/03/2026;SM F47;4,73;5,85
+30/03/2026;COLATINA 1;17,98;17,46
+30/03/2026;COLATINA 2;13,46;12,07
+30/03/2026;PANCAS;18,55;18,19
+30/03/2026;SM F47;5,82;5,85
+31/03/2026;COLATINA 1;16,62;17,46
+31/03/2026;COLATINA 2;12,49;12,07
+31/03/2026;PANCAS;19,15;18,19
+31/03/2026;SM F47;5,52;5,85
+01/04/2026;COLATINA 1;15,72;16,05
+01/04/2026;COLATINA 2;11,260000000000002;11,2
+01/04/2026;PANCAS;15,77;16,79
+01/04/2026;SM F47;5,99;5,29
+02/04/2026;COLATINA 1;14,040000000000001;16,05
+02/04/2026;COLATINA 2;11,52;11,2
+02/04/2026;PANCAS;18,79;16,79
+02/04/2026;SM F47;5,58;5,29
+03/04/2026;COLATINA 1;16,03;16,05
+03/04/2026;COLATINA 2;13,07;11,2
+03/04/2026;PANCAS;19,05;16,79
+03/04/2026;SM F47;5,48;5,29
+04/04/2026;COLATINA 1;13,36;16,05
+04/04/2026;COLATINA 2;11,15;11,2
+04/04/2026;PANCAS;18,65;16,79
+04/04/2026;SM F47;5,87;5,29
+05/04/2026;COLATINA 1;15,309999999999999;16,05
+05/04/2026;COLATINA 2;12,629999999999999;11,2
+05/04/2026;PANCAS;20,67;16,79
+05/04/2026;SM F47;6,43;5,29
+06/04/2026;COLATINA 1;14,57;16,05
+06/04/2026;COLATINA 2;13,17;11,2
+06/04/2026;PANCAS;18,509999999999998;16,79
+06/04/2026;SM F47;5,51;5,29
+07/04/2026;COLATINA 1;11,3;16,05
+07/04/2026;COLATINA 2;11,469999999999999;11,2
+07/04/2026;PANCAS;16,49;16,79
+07/04/2026;SM F47;4,8;5,29
+08/04/2026;COLATINA 1;12,83;16,05
+08/04/2026;COLATINA 2;13,9;11,2
+08/04/2026;PANCAS;19,79;16,79
+08/04/2026;SM F47;4,91;5,29
+09/04/2026;COLATINA 1;12,56;16,05
+09/04/2026;COLATINA 2;12,879999999999999;11,2
+09/04/2026;PANCAS;19,7;16,79
+09/04/2026;SM F47;5,66;5,29
+10/04/2026;COLATINA 1;10,29;16,05
+10/04/2026;COLATINA 2;10,719999999999999;11,2
+10/04/2026;PANCAS;12,09;16,79
+10/04/2026;SM F47;4,25;5,29
+11/04/2026;COLATINA 1;7,27;16,05
+11/04/2026;COLATINA 2;7,6899999999999995;11,2
+11/04/2026;PANCAS;10,129999999999999;16,79
+11/04/2026;SM F47;4,52;5,29
+12/04/2026;COLATINA 1;8,120000000000001;16,05
+12/04/2026;COLATINA 2;8,4;11,2
+12/04/2026;PANCAS;13,29;16,79
+12/04/2026;SM F47;2,83;5,29
+13/04/2026;COLATINA 1;10,11;16,05
+13/04/2026;COLATINA 2;10,530000000000001;11,2
+13/04/2026;PANCAS;16,39;16,79
+13/04/2026;SM F47;5,35;5,29
+14/04/2026;COLATINA 1;22,32;16,05
+14/04/2026;COLATINA 2;15,370000000000001;11,2
+14/04/2026;PANCAS;21,66;16,79
+14/04/2026;SM F47;5,82;5,29
+15/04/2026;COLATINA 1;21,03;16,05
+15/04/2026;COLATINA 2;15,059999999999999;11,2
+15/04/2026;PANCAS;21,560000000000002;16,79
+15/04/2026;SM F47;6,83;5,29
+16/04/2026;COLATINA 1;19,31;16,05
+16/04/2026;COLATINA 2;14,440000000000001;11,2
+16/04/2026;PANCAS;20,67;16,79
+16/04/2026;SM F47;6,72;5,29
+17/04/2026;COLATINA 1;16,57;16,05
+17/04/2026;COLATINA 2;11,440000000000001;11,2
+17/04/2026;PANCAS;18,33;16,79
+17/04/2026;SM F47;3,58;5,29
+18/04/2026;COLATINA 1;18,9;16,05
+18/04/2026;COLATINA 2;13,58;11,2
+18/04/2026;PANCAS;21,11;16,79
+18/04/2026;SM F47;5,52;5,29
+19/04/2026;COLATINA 1;19,36;16,05
+19/04/2026;COLATINA 2;14,629999999999999;11,2
+19/04/2026;PANCAS;22,17;16,79
+19/04/2026;SM F47;6,91;5,29
+20/04/2026;COLATINA 1;15,68;16,05
+20/04/2026;COLATINA 2;12,61;11,2
+20/04/2026;PANCAS;17,77;16,79
+20/04/2026;SM F47;5,25;5,29
+21/04/2026;COLATINA 1;19,48;16,05
+21/04/2026;COLATINA 2;14,129999999999999;11,2
+21/04/2026;PANCAS;20,89;16,79
+21/04/2026;SM F47;6,23;5,29
+22/04/2026;COLATINA 1;18,4;16,05
+22/04/2026;COLATINA 2;14,43;11,2
+22/04/2026;PANCAS;20,3;16,79
+22/04/2026;SM F47;5,53;5,29
+23/04/2026;COLATINA 1;17,92;16,05
+23/04/2026;COLATINA 2;12,81;11,2
+23/04/2026;PANCAS;18,96;16,79
+23/04/2026;SM F47;5,24;5,29
+24/04/2026;COLATINA 1;19,02;16,05
+24/04/2026;COLATINA 2;13,16;11,2
+24/04/2026;PANCAS;21,14;16,79
+24/04/2026;SM F47;6,08;5,29
+25/04/2026;COLATINA 1;14,61;16,05
+25/04/2026;COLATINA 2;12,82;11,2
+25/04/2026;PANCAS;19,5;16,79
+25/04/2026;SM F47;5,85;5,29
+26/04/2026;COLATINA 1;19,22;16,05
+26/04/2026;COLATINA 2;14,579999999999998;11,2
+26/04/2026;PANCAS;22,44;16,79
+26/04/2026;SM F47;5,57;5,29
+27/04/2026;COLATINA 1;21,07;16,05
+27/04/2026;COLATINA 2;14,93;11,2
+27/04/2026;PANCAS;21,09;16,79
+27/04/2026;SM F47;6,48;5,29
+28/04/2026;COLATINA 1;18,09;16,05
+28/04/2026;COLATINA 2;13,83;11,2
+28/04/2026;PANCAS;20,71;16,79
+28/04/2026;SM F47;3,66;5,29
+29/04/2026;COLATINA 1;15,48;16,05
+29/04/2026;COLATINA 2;12,24;11,2
+29/04/2026;PANCAS;17,810000000000002;16,79
+29/04/2026;SM F47;4,52;5,29
+30/04/2026;COLATINA 1;19,55;16,05
+30/04/2026;COLATINA 2;14,559999999999999;11,2
+30/04/2026;PANCAS;21,15;16,79
+30/04/2026;SM F47;7,3;5,29
+01/05/2026;COLATINA 1;13,27;14,96
+01/05/2026;COLATINA 2;12,01;10,53
+01/05/2026;PANCAS;17,6;15,85
+01/05/2026;SM F47;6,13;4,86
+02/05/2026;COLATINA 1;15,25;14,96
+02/05/2026;COLATINA 2;12,46;10,53
+02/05/2026;PANCAS;17,810000000000002;15,85
+02/05/2026;SM F47;6,38;4,86
+03/05/2026;COLATINA 1;14,51;14,96
+03/05/2026;COLATINA 2;11,83;10,53
+03/05/2026;PANCAS;16,380000000000003;15,85
+03/05/2026;SM F47;5,65;4,86
+04/05/2026;COLATINA 1;6,870000000000001;14,96
+04/05/2026;COLATINA 2;5,970000000000001;10,53
+04/05/2026;PANCAS;9,16;15,85
+04/05/2026;SM F47;3,58;4,86
+05/05/2026;COLATINA 1;19,689999999999998;14,96
+05/05/2026;COLATINA 2;14,3;10,53
+05/05/2026;PANCAS;20,08;15,85
+05/05/2026;SM F47;5,04;4,86
+06/05/2026;COLATINA 1;16,1388;14,96
+06/05/2026;COLATINA 2;10,726500000000001;10,53
+06/05/2026;PANCAS;16,4835;15,85
+06/05/2026;SM F47;4,3928;4,86
+07/05/2026;COLATINA 1;13,4087;14,96
+07/05/2026;COLATINA 2;8,4158;10,53
+07/05/2026;PANCAS;14,974499999999999;15,85
+07/05/2026;SM F47;5,5456;4,86
+08/05/2026;COLATINA 1;13,6898;14,96
+08/05/2026;COLATINA 2;9,64;10,53
+08/05/2026;PANCAS;14,92;15,85
+08/05/2026;SM F47;5,19;4,86
+09/05/2026;COLATINA 1;13,93883;14,96
+09/05/2026;COLATINA 2;9,3;10,53
+09/05/2026;PANCAS;16,75;15,85
+09/05/2026;SM F47;5,34;4,86
+10/05/2026;COLATINA 1;20,25907;14,96
+10/05/2026;COLATINA 2;14,1722;10,53
+10/05/2026;PANCAS;21,4745;15,85
+10/05/2026;SM F47;6,028599999999999;4,86
+11/05/2026;COLATINA 1;18,7348;14,96
+11/05/2026;COLATINA 2;14,097100000000001;10,53
+11/05/2026;PANCAS;21,199099999999998;15,85
+11/05/2026;SM F47;5,688999999999999;4,86
+12/05/2026;COLATINA 1;7,818747999999999;14,96
+12/05/2026;COLATINA 2;5,6862;10,53
+12/05/2026;PANCAS;7,4241719999999995;15,85
+12/05/2026;SM F47;2,6679;4,86
+13/05/2026;COLATINA 1;12,63672;14,96
+13/05/2026;COLATINA 2;8,740499999999999;10,53
+13/05/2026;PANCAS;12,551027999999999;15,85
+13/05/2026;SM F47;5,099799999999999;4,86
+14/05/2026;COLATINA 1;14,552400000000002;14,96
+14/05/2026;COLATINA 2;10,1722;10,53
+14/05/2026;PANCAS;16,7104;15,85
+14/05/2026;SM F47;5,099799999999999;4,86
+25/03/2026;Colatina 1 (Individual);1,99;5,82
+26/03/2026;Colatina 1 (Individual);3,7;5,82
+27/03/2026;Colatina 1 (Individual);5,51;5,82
+28/03/2026;Colatina 1 (Individual);3,72;5,82
+29/03/2026;Colatina 1 (Individual);4,08;5,82
+30/03/2026;Colatina 1 (Individual);4,85;5,82
+31/03/2026;Colatina 1 (Individual);3,73;5,82
+01/04/2026;Colatina 1 (Individual);4,74;5,35
+02/04/2026;Colatina 1 (Individual);2,81;5,35
+03/04/2026;Colatina 1 (Individual);3,8;5,35
+04/04/2026;Colatina 1 (Individual);3,15;5,35
+05/04/2026;Colatina 1 (Individual);3,04;5,35
+06/04/2026;Colatina 1 (Individual);1,43;5,35
+07/04/2026;Colatina 1 (Individual);0,0;5,35
+08/04/2026;Colatina 1 (Individual);0,0;5,35
+09/04/2026;Colatina 1 (Individual);0,0;5,35
+10/04/2026;Colatina 1 (Individual);0,0;5,35
+11/04/2026;Colatina 1 (Individual);0,0;5,35
+12/04/2026;Colatina 1 (Individual);0,0;5,35
+13/04/2026;Colatina 1 (Individual);0,0;5,35
+14/04/2026;Colatina 1 (Individual);7,44;5,35
+15/04/2026;Colatina 1 (Individual);6,39;5,35
+16/04/2026;Colatina 1 (Individual);5,3;5,35
+17/04/2026;Colatina 1 (Individual);5,42;5,35
+18/04/2026;Colatina 1 (Individual);5,68;5,35
+19/04/2026;Colatina 1 (Individual);5,29;5,35
+20/04/2026;Colatina 1 (Individual);3,08;5,35
+21/04/2026;Colatina 1 (Individual);5,82;5,35
+22/04/2026;Colatina 1 (Individual);4,35;5,35
+23/04/2026;Colatina 1 (Individual);5,92;5,35
+24/04/2026;Colatina 1 (Individual);6,45;5,35
+25/04/2026;Colatina 1 (Individual);2,29;5,35
+26/04/2026;Colatina 1 (Individual);4,98;5,35
+27/04/2026;Colatina 1 (Individual);6,96;5,35
+28/04/2026;Colatina 1 (Individual);4,28;5,35
+29/04/2026;Colatina 1 (Individual);3,65;5,35
+30/04/2026;Colatina 1 (Individual);5,31;5,35
+01/05/2026;Colatina 1 (Individual);2,12;4,99
+02/05/2026;Colatina 1 (Individual);4,15;4,99
+03/05/2026;Colatina 1 (Individual);2,88;4,99
+04/05/2026;Colatina 1 (Individual);1,07;4,99
+05/05/2026;Colatina 1 (Individual);5,97;4,99
+06/05/2026;Colatina 1 (Individual);5,6959;4,99
+07/05/2026;Colatina 1 (Individual);4,9866;4,99
+08/05/2026;Colatina 1 (Individual);4,5198;4,99
+09/05/2026;Colatina 1 (Individual);4,56883;4,99
+10/05/2026;Colatina 1 (Individual);6,6523699999999995;4,99
+11/05/2026;Colatina 1 (Individual);4,867400000000001;4,99
+12/05/2026;Colatina 1 (Individual);2,549448;4,99
+13/05/2026;Colatina 1 (Individual);4,18392;4,99
+14/05/2026;Colatina 1 (Individual);4,867400000000001;4,99
+25/03/2026;Colatina 2 (Individual);3,95;5,82
+26/03/2026;Colatina 2 (Individual);4,77;5,82
+27/03/2026;Colatina 2 (Individual);6,28;5,82
+28/03/2026;Colatina 2 (Individual);6,01;5,82
+29/03/2026;Colatina 2 (Individual);6,65;5,82
+30/03/2026;Colatina 2 (Individual);6,5;5,82
+31/03/2026;Colatina 2 (Individual);5,95;5,82
+01/04/2026;Colatina 2 (Individual);5,44;5,35
+02/04/2026;Colatina 2 (Individual);5,54;5,35
+03/04/2026;Colatina 2 (Individual);6,14;5,35
+04/04/2026;Colatina 2 (Individual);5,03;5,35
+05/04/2026;Colatina 2 (Individual);6,1;5,35
+06/04/2026;Colatina 2 (Individual);6,49;5,35
+07/04/2026;Colatina 2 (Individual);5,54;5,35
+08/04/2026;Colatina 2 (Individual);6,33;5,35
+09/04/2026;Colatina 2 (Individual);6,15;5,35
+10/04/2026;Colatina 2 (Individual);5,09;5,35
+11/04/2026;Colatina 2 (Individual);3,59;5,35
+12/04/2026;Colatina 2 (Individual);4,01;5,35
+13/04/2026;Colatina 2 (Individual);4,99;5,35
+14/04/2026;Colatina 2 (Individual);7,42;5,35
+15/04/2026;Colatina 2 (Individual);7,28;5,35
+16/04/2026;Colatina 2 (Individual);6,97;5,35
+17/04/2026;Colatina 2 (Individual);5,53;5,35
+18/04/2026;Colatina 2 (Individual);6,55;5,35
+19/04/2026;Colatina 2 (Individual);6,95;5,35
+20/04/2026;Colatina 2 (Individual);6,24;5,35
+21/04/2026;Colatina 2 (Individual);6,73;5,35
+22/04/2026;Colatina 2 (Individual);6,97;5,35
+23/04/2026;Colatina 2 (Individual);6,0;5,35
+24/04/2026;Colatina 2 (Individual);6,01;5,35
+25/04/2026;Colatina 2 (Individual);6,11;5,35
+26/04/2026;Colatina 2 (Individual);6,98;5,35
+27/04/2026;Colatina 2 (Individual);7,02;5,35
+28/04/2026;Colatina 2 (Individual);6,87;5,35
+29/04/2026;Colatina 2 (Individual);5,92;5,35
+30/04/2026;Colatina 2 (Individual);7,0;5,35
+01/05/2026;Colatina 2 (Individual);5,5;4,99
+02/05/2026;Colatina 2 (Individual);5,52;4,99
+03/05/2026;Colatina 2 (Individual);5,75;4,99
+04/05/2026;Colatina 2 (Individual);2,85;4,99
+05/05/2026;Colatina 2 (Individual);6,79;4,99
+06/05/2026;Colatina 2 (Individual);5,178;4,99
+07/05/2026;Colatina 2 (Individual);4,1479;4,99
+08/05/2026;Colatina 2 (Individual);4,61;4,99
+09/05/2026;Colatina 2 (Individual);4,59;4,99
+10/05/2026;Colatina 2 (Individual);6,7656;4,99
+11/05/2026;Colatina 2 (Individual);6,840599999999999;4,99
+12/05/2026;Colatina 2 (Individual);2,6043;4,99
+13/05/2026;Colatina 2 (Individual);4,1552999999999995;4,99
+14/05/2026;Colatina 2 (Individual);4,7442;4,99
+25/03/2026;Colatina 3 (Individual);4,14;5,82
+26/03/2026;Colatina 3 (Individual);5,04;5,82
+27/03/2026;Colatina 3 (Individual);6,34;5,82
+28/03/2026;Colatina 3 (Individual);6,04;5,82
+29/03/2026;Colatina 3 (Individual);6,71;5,82
+30/03/2026;Colatina 3 (Individual);6,63;5,82
+31/03/2026;Colatina 3 (Individual);6,94;5,82
+01/04/2026;Colatina 3 (Individual);5,54;5,35
+02/04/2026;Colatina 3 (Individual);5,69;5,35
+03/04/2026;Colatina 3 (Individual);6,09;5,35
+04/04/2026;Colatina 3 (Individual);5,18;5,35
+05/04/2026;Colatina 3 (Individual);6,17;5,35
+06/04/2026;Colatina 3 (Individual);6,65;5,35
+07/04/2026;Colatina 3 (Individual);5,76;5,35
+08/04/2026;Colatina 3 (Individual);6,5;5,35
+09/04/2026;Colatina 3 (Individual);6,41;5,35
+10/04/2026;Colatina 3 (Individual);5,2;5,35
+11/04/2026;Colatina 3 (Individual);3,68;5,35
+12/04/2026;Colatina 3 (Individual);4,11;5,35
+13/04/2026;Colatina 3 (Individual);5,12;5,35
+14/04/2026;Colatina 3 (Individual);7,46;5,35
+15/04/2026;Colatina 3 (Individual);7,36;5,35
+16/04/2026;Colatina 3 (Individual);7,04;5,35
+17/04/2026;Colatina 3 (Individual);5,62;5,35
+18/04/2026;Colatina 3 (Individual);6,67;5,35
+19/04/2026;Colatina 3 (Individual);7,12;5,35
+20/04/2026;Colatina 3 (Individual);6,36;5,35
+21/04/2026;Colatina 3 (Individual);6,93;5,35
+22/04/2026;Colatina 3 (Individual);7,08;5,35
+23/04/2026;Colatina 3 (Individual);6,0;5,35
+24/04/2026;Colatina 3 (Individual);6,56;5,35
+25/04/2026;Colatina 3 (Individual);6,21;5,35
+26/04/2026;Colatina 3 (Individual);7,26;5,35
+27/04/2026;Colatina 3 (Individual);7,09;5,35
+28/04/2026;Colatina 3 (Individual);6,94;5,35
+29/04/2026;Colatina 3 (Individual);5,91;5,35
+30/04/2026;Colatina 3 (Individual);7,24;5,35
+01/05/2026;Colatina 3 (Individual);5,65;4,99
+02/05/2026;Colatina 3 (Individual);5,58;4,99
+03/05/2026;Colatina 3 (Individual);5,88;4,99
+04/05/2026;Colatina 3 (Individual);2,95;4,99
+05/05/2026;Colatina 3 (Individual);6,93;4,99
+06/05/2026;Colatina 3 (Individual);5,264900000000001;4,99
+07/05/2026;Colatina 3 (Individual);4,2741999999999996;4,99
+08/05/2026;Colatina 3 (Individual);4,56;4,99
+09/05/2026;Colatina 3 (Individual);4,78;4,99
+10/05/2026;Colatina 3 (Individual);6,8411;4,99
+11/05/2026;Colatina 3 (Individual);7,0268;4,99
+12/05/2026;Colatina 3 (Individual);2,665;4,99
+13/05/2026;Colatina 3 (Individual);4,2975;4,99
+14/05/2026;Colatina 3 (Individual);4,9408;4,99
+25/03/2026;Colatina 4 (Individual);4,09;6,04
+26/03/2026;Colatina 4 (Individual);4,85;6,04
+27/03/2026;Colatina 4 (Individual);6,54;6,04
+28/03/2026;Colatina 4 (Individual);6,22;6,04
+29/03/2026;Colatina 4 (Individual);6,86;6,04
+30/03/2026;Colatina 4 (Individual);6,73;6,04
+31/03/2026;Colatina 4 (Individual);6,24;6,04
+01/04/2026;Colatina 4 (Individual);5,61;5,6
+02/04/2026;Colatina 4 (Individual);5,76;5,6
+03/04/2026;Colatina 4 (Individual);6,35;5,6
+04/04/2026;Colatina 4 (Individual);5,44;5,6
+05/04/2026;Colatina 4 (Individual);6,34;5,6
+06/04/2026;Colatina 4 (Individual);6,63;5,6
+07/04/2026;Colatina 4 (Individual);5,71;5,6
+08/04/2026;Colatina 4 (Individual);6,78;5,6
+09/04/2026;Colatina 4 (Individual);6,39;5,6
+10/04/2026;Colatina 4 (Individual);5,31;5,6
+11/04/2026;Colatina 4 (Individual);3,82;5,6
+12/04/2026;Colatina 4 (Individual);4,2;5,6
+13/04/2026;Colatina 4 (Individual);5,19;5,6
+14/04/2026;Colatina 4 (Individual);7,68;5,6
+15/04/2026;Colatina 4 (Individual);7,51;5,6
+16/04/2026;Colatina 4 (Individual);7,2;5,6
+17/04/2026;Colatina 4 (Individual);5,78;5,6
+18/04/2026;Colatina 4 (Individual);6,8;5,6
+19/04/2026;Colatina 4 (Individual);7,27;5,6
+20/04/2026;Colatina 4 (Individual);6,35;5,6
+21/04/2026;Colatina 4 (Individual);7,07;5,6
+22/04/2026;Colatina 4 (Individual);7,21;5,6
+23/04/2026;Colatina 4 (Individual);6,36;5,6
+24/04/2026;Colatina 4 (Individual);6,5;5,6
+25/04/2026;Colatina 4 (Individual);6,37;5,6
+26/04/2026;Colatina 4 (Individual);7,27;5,6
+27/04/2026;Colatina 4 (Individual);7,41;5,6
+28/04/2026;Colatina 4 (Individual);6,96;5,6
+29/04/2026;Colatina 4 (Individual);6,19;5,6
+30/04/2026;Colatina 4 (Individual);7,29;5,6
+01/05/2026;Colatina 4 (Individual);5,87;5,27
+02/05/2026;Colatina 4 (Individual);6,06;5,27
+03/05/2026;Colatina 4 (Individual);5,91;5,27
+04/05/2026;Colatina 4 (Individual);2,97;5,27
+05/05/2026;Colatina 4 (Individual);7,11;5,27
+06/05/2026;Colatina 4 (Individual);5,3843000000000005;5,27
+07/05/2026;Colatina 4 (Individual);4,222600000000001;5,27
+08/05/2026;Colatina 4 (Individual);4,81;5,27
+09/05/2026;Colatina 4 (Individual);4,69;5,27
+10/05/2026;Colatina 4 (Individual);7,085;5,27
+11/05/2026;Colatina 4 (Individual);7,0885;5,27
+12/05/2026;Colatina 4 (Individual);2,7998000000000003;5,27
+13/05/2026;Colatina 4 (Individual);4,3537;5,27
+14/05/2026;Colatina 4 (Individual);4,973799999999999;5,27
+25/03/2026;Colatina 5 (Individual);4,18;6,04
+26/03/2026;Colatina 5 (Individual);5,01;6,04
+27/03/2026;Colatina 5 (Individual);6,63;6,04
+28/03/2026;Colatina 5 (Individual);6,34;6,04
+29/03/2026;Colatina 5 (Individual);6,9;6,04
+30/03/2026;Colatina 5 (Individual);6,73;6,04
+31/03/2026;Colatina 5 (Individual);6,25;6,04
+01/04/2026;Colatina 5 (Individual);5,65;5,6
+02/04/2026;Colatina 5 (Individual);5,76;5,6
+03/04/2026;Colatina 5 (Individual);6,72;5,6
+04/04/2026;Colatina 5 (Individual);5,71;5,6
+05/04/2026;Colatina 5 (Individual);6,29;5,6
+06/04/2026;Colatina 5 (Individual);6,54;5,6
+07/04/2026;Colatina 5 (Individual);5,76;5,6
+08/04/2026;Colatina 5 (Individual);7,12;5,6
+09/04/2026;Colatina 5 (Individual);6,49;5,6
+10/04/2026;Colatina 5 (Individual);5,41;5,6
+11/04/2026;Colatina 5 (Individual);3,87;5,6
+12/04/2026;Colatina 5 (Individual);4,2;5,6
+13/04/2026;Colatina 5 (Individual);5,34;5,6
+14/04/2026;Colatina 5 (Individual);7,69;5,6
+15/04/2026;Colatina 5 (Individual);7,55;5,6
+16/04/2026;Colatina 5 (Individual);7,24;5,6
+17/04/2026;Colatina 5 (Individual);5,66;5,6
+18/04/2026;Colatina 5 (Individual);6,78;5,6
+19/04/2026;Colatina 5 (Individual);7,36;5,6
+20/04/2026;Colatina 5 (Individual);6,26;5,6
+21/04/2026;Colatina 5 (Individual);7,06;5,6
+22/04/2026;Colatina 5 (Individual);7,22;5,6
+23/04/2026;Colatina 5 (Individual);6,45;5,6
+24/04/2026;Colatina 5 (Individual);6,66;5,6
+25/04/2026;Colatina 5 (Individual);6,45;5,6
+26/04/2026;Colatina 5 (Individual);7,31;5,6
+27/04/2026;Colatina 5 (Individual);7,52;5,6
+28/04/2026;Colatina 5 (Individual);6,87;5,6
+29/04/2026;Colatina 5 (Individual);6,05;5,6
+30/04/2026;Colatina 5 (Individual);7,27;5,6
+01/05/2026;Colatina 5 (Individual);6,14;5,27
+02/05/2026;Colatina 5 (Individual);6,4;5,27
+03/05/2026;Colatina 5 (Individual);5,92;5,27
+04/05/2026;Colatina 5 (Individual);3,0;5,27
+05/05/2026;Colatina 5 (Individual);7,19;5,27
+06/05/2026;Colatina 5 (Individual);5,3422;5,27
+07/05/2026;Colatina 5 (Individual);4,193200000000001;5,27
+08/05/2026;Colatina 5 (Individual);4,83;5,27
+09/05/2026;Colatina 5 (Individual);4,61;5,27
+10/05/2026;Colatina 5 (Individual);7,0872;5,27
+11/05/2026;Colatina 5 (Individual);7,0086;5,27
+12/05/2026;Colatina 5 (Individual);2,8864;5,27
+13/05/2026;Colatina 5 (Individual);4,386799999999999;5,27
+14/05/2026;Colatina 5 (Individual);5,1984;5,27
+25/03/2026;Pancas 1 (Individual);3,29;6,06
+26/03/2026;Pancas 1 (Individual);4,79;6,06
+27/03/2026;Pancas 1 (Individual);6,36;6,06
+28/03/2026;Pancas 1 (Individual);5,48;6,06
+29/03/2026;Pancas 1 (Individual);5,73;6,06
+30/03/2026;Pancas 1 (Individual);5,66;6,06
+31/03/2026;Pancas 1 (Individual);5,56;6,06
+01/04/2026;Pancas 1 (Individual);4,83;5,6
+02/04/2026;Pancas 1 (Individual);5,79;5,6
+03/04/2026;Pancas 1 (Individual);5,87;5,6
+04/04/2026;Pancas 1 (Individual);5,63;5,6
+05/04/2026;Pancas 1 (Individual);6,27;5,6
+06/04/2026;Pancas 1 (Individual);5,68;5,6
+07/04/2026;Pancas 1 (Individual);4,89;5,6
+08/04/2026;Pancas 1 (Individual);5,92;5,6
+09/04/2026;Pancas 1 (Individual);5,95;5,6
+10/04/2026;Pancas 1 (Individual);3,32;5,6
+11/04/2026;Pancas 1 (Individual);3,1;5,6
+12/04/2026;Pancas 1 (Individual);4,06;5,6
+13/04/2026;Pancas 1 (Individual);4,86;5,6
+14/04/2026;Pancas 1 (Individual);6,09;5,6
+15/04/2026;Pancas 1 (Individual);6,46;5,6
+16/04/2026;Pancas 1 (Individual);6,32;5,6
+17/04/2026;Pancas 1 (Individual);5,34;5,6
+18/04/2026;Pancas 1 (Individual);6,43;5,6
+19/04/2026;Pancas 1 (Individual);6,73;5,6
+20/04/2026;Pancas 1 (Individual);5,5;5,6
+21/04/2026;Pancas 1 (Individual);6,34;5,6
+22/04/2026;Pancas 1 (Individual);6,13;5,6
+23/04/2026;Pancas 1 (Individual);5,78;5,6
+24/04/2026;Pancas 1 (Individual);6,43;5,6
+25/04/2026;Pancas 1 (Individual);5,88;5,6
+26/04/2026;Pancas 1 (Individual);6,82;5,6
+27/04/2026;Pancas 1 (Individual);6,32;5,6
+28/04/2026;Pancas 1 (Individual);6,3;5,6
+29/04/2026;Pancas 1 (Individual);5,42;5,6
+30/04/2026;Pancas 1 (Individual);6,49;5,6
+01/05/2026;Pancas 1 (Individual);5,27;5,28
+02/05/2026;Pancas 1 (Individual);5,28;5,28
+03/05/2026;Pancas 1 (Individual);5,0;5,28
+04/05/2026;Pancas 1 (Individual);2,78;5,28
+05/05/2026;Pancas 1 (Individual);6,11;5,28
+06/05/2026;Pancas 1 (Individual);5,7187;5,28
+07/05/2026;Pancas 1 (Individual);5,2362;5,28
+08/05/2026;Pancas 1 (Individual);4,31;5,28
+09/05/2026;Pancas 1 (Individual);5,11;5,28
+10/05/2026;Pancas 1 (Individual);7,008499999999999;5,28
+11/05/2026;Pancas 1 (Individual);7,010299999999999;5,28
+12/05/2026;Pancas 1 (Individual);2,424672;5,28
+13/05/2026;Pancas 1 (Individual);4,120127999999999;5,28
+14/05/2026;Pancas 1 (Individual);5,5382;5,28
+25/03/2026;Pancas 2 (Individual);3,84;6,06
+26/03/2026;Pancas 2 (Individual);5,43;6,06
+27/03/2026;Pancas 2 (Individual);7,4;6,06
+28/03/2026;Pancas 2 (Individual);6,25;6,06
+29/03/2026;Pancas 2 (Individual);6,62;6,06
+30/03/2026;Pancas 2 (Individual);6,49;6,06
+31/03/2026;Pancas 2 (Individual);6,74;6,06
+01/04/2026;Pancas 2 (Individual);5,48;5,6
+02/04/2026;Pancas 2 (Individual);6,55;5,6
+03/04/2026;Pancas 2 (Individual);6,64;5,6
+04/04/2026;Pancas 2 (Individual);6,55;5,6
+05/04/2026;Pancas 2 (Individual);7,17;5,6
+06/04/2026;Pancas 2 (Individual);6,51;5,6
+07/04/2026;Pancas 2 (Individual);5,88;5,6
+08/04/2026;Pancas 2 (Individual);6,98;5,6
+09/04/2026;Pancas 2 (Individual);6,87;5,6
+10/04/2026;Pancas 2 (Individual);4,45;5,6
+11/04/2026;Pancas 2 (Individual);3,52;5,6
+12/04/2026;Pancas 2 (Individual);4,63;5,6
+13/04/2026;Pancas 2 (Individual);5,81;5,6
+14/04/2026;Pancas 2 (Individual);7,83;5,6
+15/04/2026;Pancas 2 (Individual);7,53;5,6
+16/04/2026;Pancas 2 (Individual);7,2;5,6
+17/04/2026;Pancas 2 (Individual);6,55;5,6
+18/04/2026;Pancas 2 (Individual);7,33;5,6
+19/04/2026;Pancas 2 (Individual);7,76;5,6
+20/04/2026;Pancas 2 (Individual);6,18;5,6
+21/04/2026;Pancas 2 (Individual);7,28;5,6
+22/04/2026;Pancas 2 (Individual);7,1;5,6
+23/04/2026;Pancas 2 (Individual);6,58;5,6
+24/04/2026;Pancas 2 (Individual);7,33;5,6
+25/04/2026;Pancas 2 (Individual);6,8;5,6
+26/04/2026;Pancas 2 (Individual);7,82;5,6
+27/04/2026;Pancas 2 (Individual);7,39;5,6
+28/04/2026;Pancas 2 (Individual);7,21;5,6
+29/04/2026;Pancas 2 (Individual);6,23;5,6
+30/04/2026;Pancas 2 (Individual);7,36;5,6
+01/05/2026;Pancas 2 (Individual);6,2;5,28
+02/05/2026;Pancas 2 (Individual);6,15;5,28
+03/05/2026;Pancas 2 (Individual);5,73;5,28
+04/05/2026;Pancas 2 (Individual);3,2;5,28
+05/05/2026;Pancas 2 (Individual);7,02;5,28
+06/05/2026;Pancas 2 (Individual);5,361;5,28
+07/05/2026;Pancas 2 (Individual);4,833699999999999;5,28
+08/05/2026;Pancas 2 (Individual);5,29;5,28
+09/05/2026;Pancas 2 (Individual);5,79;5,28
+10/05/2026;Pancas 2 (Individual);7,2101999999999995;5,28
+11/05/2026;Pancas 2 (Individual);7,077699999999999;5,28
+12/05/2026;Pancas 2 (Individual);2,5010999999999997;5,28
+13/05/2026;Pancas 2 (Individual);4,229;5,28
+14/05/2026;Pancas 2 (Individual);5,6331999999999995;5,28
+25/03/2026;Pancas 3 (Individual);3,75;6,06
+26/03/2026;Pancas 3 (Individual);5,46;6,06
+27/03/2026;Pancas 3 (Individual);7,46;6,06
+28/03/2026;Pancas 3 (Individual);6,19;6,06
+29/03/2026;Pancas 3 (Individual);6,6;6,06
+30/03/2026;Pancas 3 (Individual);6,4;6,06
+31/03/2026;Pancas 3 (Individual);6,85;6,06
+01/04/2026;Pancas 3 (Individual);5,46;5,6
+02/04/2026;Pancas 3 (Individual);6,45;5,6
+03/04/2026;Pancas 3 (Individual);6,54;5,6
+04/04/2026;Pancas 3 (Individual);6,47;5,6
+05/04/2026;Pancas 3 (Individual);7,23;5,6
+06/04/2026;Pancas 3 (Individual);6,32;5,6
+07/04/2026;Pancas 3 (Individual);5,72;5,6
+08/04/2026;Pancas 3 (Individual);6,89;5,6
+09/04/2026;Pancas 3 (Individual);6,88;5,6
+10/04/2026;Pancas 3 (Individual);4,32;5,6
+11/04/2026;Pancas 3 (Individual);3,51;5,6
+12/04/2026;Pancas 3 (Individual);4,6;5,6
+13/04/2026;Pancas 3 (Individual);5,72;5,6
+14/04/2026;Pancas 3 (Individual);7,74;5,6
+15/04/2026;Pancas 3 (Individual);7,57;5,6
+16/04/2026;Pancas 3 (Individual);7,15;5,6
+17/04/2026;Pancas 3 (Individual);6,44;5,6
+18/04/2026;Pancas 3 (Individual);7,35;5,6
+19/04/2026;Pancas 3 (Individual);7,68;5,6
+20/04/2026;Pancas 3 (Individual);6,09;5,6
+21/04/2026;Pancas 3 (Individual);7,27;5,6
+22/04/2026;Pancas 3 (Individual);7,07;5,6
+23/04/2026;Pancas 3 (Individual);6,6;5,6
+24/04/2026;Pancas 3 (Individual);7,38;5,6
+25/04/2026;Pancas 3 (Individual);6,82;5,6
+26/04/2026;Pancas 3 (Individual);7,8;5,6
+27/04/2026;Pancas 3 (Individual);7,38;5,6
+28/04/2026;Pancas 3 (Individual);7,2;5,6
+29/04/2026;Pancas 3 (Individual);6,16;5,6
+30/04/2026;Pancas 3 (Individual);7,3;5,6
+01/05/2026;Pancas 3 (Individual);6,13;5,28
+02/05/2026;Pancas 3 (Individual);6,38;5,28
+03/05/2026;Pancas 3 (Individual);5,65;5,28
+04/05/2026;Pancas 3 (Individual);3,18;5,28
+05/05/2026;Pancas 3 (Individual);6,95;5,28
+06/05/2026;Pancas 3 (Individual);5,4037999999999995;5,28
+07/05/2026;Pancas 3 (Individual);4,9046;5,28
+08/05/2026;Pancas 3 (Individual);5,32;5,28
+09/05/2026;Pancas 3 (Individual);5,85;5,28
+10/05/2026;Pancas 3 (Individual);7,2558;5,28
+11/05/2026;Pancas 3 (Individual);7,1110999999999995;5,28
+12/05/2026;Pancas 3 (Individual);2,4983999999999997;5,28
+13/05/2026;Pancas 3 (Individual);4,201899999999999;5,28
+14/05/2026;Pancas 3 (Individual);5,539000000000001;5,28
+25/03/2026;SM F47 (Individual);0,0;5,85
+26/03/2026;SM F47 (Individual);5,11;5,85
+27/03/2026;SM F47 (Individual);1,56;5,85
+28/03/2026;SM F47 (Individual);5,19;5,85
+29/03/2026;SM F47 (Individual);4,73;5,85
+30/03/2026;SM F47 (Individual);5,82;5,85
+31/03/2026;SM F47 (Individual);5,52;5,85
+01/04/2026;SM F47 (Individual);5,99;5,29
+02/04/2026;SM F47 (Individual);5,58;5,29
+03/04/2026;SM F47 (Individual);5,48;5,29
+04/04/2026;SM F47 (Individual);5,87;5,29
+05/04/2026;SM F47 (Individual);6,43;5,29
+06/04/2026;SM F47 (Individual);5,51;5,29
+07/04/2026;SM F47 (Individual);4,8;5,29
+08/04/2026;SM F47 (Individual);4,91;5,29
+09/04/2026;SM F47 (Individual);5,66;5,29
+10/04/2026;SM F47 (Individual);4,25;5,29
+11/04/2026;SM F47 (Individual);4,52;5,29
+12/04/2026;SM F47 (Individual);2,83;5,29
+13/04/2026;SM F47 (Individual);5,35;5,29
+14/04/2026;SM F47 (Individual);5,82;5,29
+15/04/2026;SM F47 (Individual);6,83;5,29
+16/04/2026;SM F47 (Individual);6,72;5,29
+17/04/2026;SM F47 (Individual);3,58;5,29
+18/04/2026;SM F47 (Individual);5,52;5,29
+19/04/2026;SM F47 (Individual);6,91;5,29
+20/04/2026;SM F47 (Individual);5,25;5,29
+21/04/2026;SM F47 (Individual);6,23;5,29
+22/04/2026;SM F47 (Individual);5,53;5,29
+23/04/2026;SM F47 (Individual);5,24;5,29
+24/04/2026;SM F47 (Individual);6,08;5,29
+25/04/2026;SM F47 (Individual);5,85;5,29
+26/04/2026;SM F47 (Individual);5,57;5,29
+27/04/2026;SM F47 (Individual);6,48;5,29
+28/04/2026;SM F47 (Individual);3,66;5,29
+29/04/2026;SM F47 (Individual);4,52;5,29
+30/04/2026;SM F47 (Individual);7,3;5,29
+01/05/2026;SM F47 (Individual);6,13;4,86
+02/05/2026;SM F47 (Individual);6,38;4,86
+03/05/2026;SM F47 (Individual);5,65;4,86
+04/05/2026;SM F47 (Individual);3,58;4,86
+05/05/2026;SM F47 (Individual);5,04;4,86
+06/05/2026;SM F47 (Individual);4,3928;4,86
+07/05/2026;SM F47 (Individual);5,5456;4,86
+08/05/2026;SM F47 (Individual);5,19;4,86
+09/05/2026;SM F47 (Individual);5,34;4,86
+10/05/2026;SM F47 (Individual);6,028599999999999;4,86
+11/05/2026;SM F47 (Individual);5,688999999999999;4,86
+12/05/2026;SM F47 (Individual);2,6679;4,86
+13/05/2026;SM F47 (Individual);5,099799999999999;4,86
+14/05/2026;SM F47 (Individual);5,099799999999999;4,86
+01/05/2026;PCH Alegre;16922,91;0,0
+02/05/2026;PCH Alegre;16608,62;0,0
+03/05/2026;PCH Alegre;17074,33;0,0
+04/05/2026;PCH Alegre;21486,28;0,0
+05/05/2026;PCH Alegre;19693,48;0,0
+06/05/2026;PCH Alegre;17972,32;0,0
+07/05/2026;PCH Alegre;18266,94;0,0
+08/05/2026;PCH Alegre;17541,85;0,0
+09/05/2026;PCH Alegre;16556,54;0,0
+10/05/2026;PCH Alegre;16060,6;0,0
+11/05/2026;PCH Alegre;14942,89;0,0
+12/05/2026;PCH Alegre;17181,38;0,0
+13/05/2026;PCH Alegre;17316,12;0,0
+14/05/2026;PCH Alegre;17106,41;0,0
+01/05/2026;PCH Jucu;41153,71;0,0
+02/05/2026;PCH Jucu;40113,55;0,0
+03/05/2026;PCH Jucu;39986,32;0,0
+04/05/2026;PCH Jucu;49086,69;0,0
+05/05/2026;PCH Jucu;53600,52;0,0
+06/05/2026;PCH Jucu;51434,44;0,0
+07/05/2026;PCH Jucu;56610,64;0,0
+08/05/2026;PCH Jucu;49580,0;0,0
+09/05/2026;PCH Jucu;48600,6;0,0
+10/05/2026;PCH Jucu;46982,62;0,0
+11/05/2026;PCH Jucu;41423,73;0,0
+12/05/2026;PCH Jucu;42916,76;0,0
+13/05/2026;PCH Jucu;39635,13;0,0
+14/05/2026;PCH Jucu;39714,73;0,0
+01/05/2026;PCH Viçosa;39284,0;0,0
+02/05/2026;PCH Viçosa;38111,5;0,0
+03/05/2026;PCH Viçosa;37787,4;0,0
+04/05/2026;PCH Viçosa;40631,5;0,0
+05/05/2026;PCH Viçosa;39957,4;0,0
+06/05/2026;PCH Viçosa;37930,2;0,0
+07/05/2026;PCH Viçosa;43304,1;0,0
+08/05/2026;PCH Viçosa;39669,7;0,0
+09/05/2026;PCH Viçosa;37222,5;0,0
+10/05/2026;PCH Viçosa;36033,2;0,0
+11/05/2026;PCH Viçosa;34748,0;0,0
+12/05/2026;PCH Viçosa;36436,4;0,0
+13/05/2026;PCH Viçosa;36124,9;0,0
+14/05/2026;PCH Viçosa;34862,8;0,0
+01/05/2026;CGH Cachoeira do Oito;0,0;0,0
+02/05/2026;CGH Cachoeira do Oito;0,0;0,0
+03/05/2026;CGH Cachoeira do Oito;0,0;0,0
+04/05/2026;CGH Cachoeira do Oito;2252,02;0,0
+05/05/2026;CGH Cachoeira do Oito;3177,68;0,0
+06/05/2026;CGH Cachoeira do Oito;3174,98;0,0
+07/05/2026;CGH Cachoeira do Oito;2836,51;0,0
+08/05/2026;CGH Cachoeira do Oito;2535,3;0,0
+09/05/2026;CGH Cachoeira do Oito;0,0;0,0
+10/05/2026;CGH Cachoeira do Oito;0,0;0,0
+11/05/2026;CGH Cachoeira do Oito;1249,88;0,0
+12/05/2026;CGH Cachoeira do Oito;2063,23;0,0
+13/05/2026;CGH Cachoeira do Oito;695,088;0,0
+14/05/2026;CGH Cachoeira do Oito;0,0;0,0
+01/05/2026;CGH Cachoeira da Onça;0,0;0,0
+02/05/2026;CGH Cachoeira da Onça;0,0;0,0
+03/05/2026;CGH Cachoeira da Onça;0,0;0,0
+04/05/2026;CGH Cachoeira da Onça;2499,12;0,0
+05/05/2026;CGH Cachoeira da Onça;5646,67;0,0
+06/05/2026;CGH Cachoeira da Onça;5952,96;0,0
+07/05/2026;CGH Cachoeira da Onça;6059,45;0,0
+08/05/2026;CGH Cachoeira da Onça;6240,89;0,0
+09/05/2026;CGH Cachoeira da Onça;6217,13;0,0
+10/05/2026;CGH Cachoeira da Onça;6180,41;0,0
+11/05/2026;CGH Cachoeira da Onça;6158,38;0,0
+12/05/2026;CGH Cachoeira da Onça;6149,52;0,0
+13/05/2026;CGH Cachoeira da Onça;6144,12;0,0
+14/05/2026;CGH Cachoeira da Onça;6136,34;0,0
+01/05/2026;CGH Santa Maria;0,0;0,0
+02/05/2026;CGH Santa Maria;0,0;0,0
+03/05/2026;CGH Santa Maria;0,0;0,0
+04/05/2026;CGH Santa Maria;1507,36;0,0
+05/05/2026;CGH Santa Maria;414,072;0,0
+06/05/2026;CGH Santa Maria;0,0;0,0
+07/05/2026;CGH Santa Maria;0,0;0,0
+08/05/2026;CGH Santa Maria;0,0;0,0
+09/05/2026;CGH Santa Maria;0,0;0,0
+10/05/2026;CGH Santa Maria;0,0;0,0
+11/05/2026;CGH Santa Maria;0,0;0,0
+12/05/2026;CGH Santa Maria;0,0;0,0
+13/05/2026;CGH Santa Maria;1452,06;0,0
+14/05/2026;CGH Santa Maria;605,34;0,0
