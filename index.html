@@ -20,7 +20,6 @@
     .visao-btn:hover { background: #f4f6f9; }
     .visao-btn.active { background: #2980b9; color: white; }
 
-    /* Estilo do novo seletor mestre de Fontes */
     .fonte-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e9ecef; padding-bottom: 15px; justify-content: center;}
     .fonte-btn { background: white; border: 2px solid #34495e; color: #34495e; padding: 10px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 15px;}
     .fonte-btn:hover { background: #f4f6f9; }
@@ -84,7 +83,7 @@
     let dadosGerais = [];
     let modoAtual = 'diario';
     let tipoVisaoAtual = 'agrupada'; 
-    let fonteAtual = 'solar'; // NOVA VARIÁVEL DE ESTADO
+    let fonteAtual = 'solar'; 
 
     async function carregarDadosAutomaticos() {
       try {
@@ -127,7 +126,6 @@
       preencherFiltros();
     }
 
-    // NOVA FUNÇÃO: Alternar entre Solar e Hidro
     function mudarFonte(fonte) {
       fonteAtual = fonte;
       
@@ -142,7 +140,7 @@
         document.getElementById('btnFonteHidro').classList.add('active');
         document.getElementById('containerVisaoIndividual').style.display = 'none';
         document.getElementById('tituloPainel').innerText = "Geração Histórica (PCH/CGH)";
-        tipoVisaoAtual = 'agrupada'; // Força agrupada pois hidro não tem inversores individuais
+        tipoVisaoAtual = 'agrupada'; 
       }
       
       preencherFiltros();
@@ -164,7 +162,6 @@
     }
 
     function obterDadosDaFonte() {
-      // Filtra os dados gerais para separar as hidro (contém PCH) das solares
       if (fonteAtual === 'hidro') {
         return dadosGerais.filter(d => d.usina.includes('PCH') || d.usina.includes('CGH'));
       } else {
@@ -184,13 +181,11 @@
         }
       }
 
-      // Preenche Usinas
       const usinas = [...new Set(usinasFiltradas)].sort();
       const selectUsina = document.getElementById('usinaSelect');
       selectUsina.innerHTML = '';
       usinas.forEach(u => selectUsina.appendChild(new Option(u, u)));
 
-      // Preenche Meses
       const meses = [...new Set(dadosFiltrados.map(d => d.mesAno))].sort((a, b) => {
         const [mesA, anoA] = a.split('/');
         const [mesB, anoB] = b.split('/');
@@ -200,7 +195,6 @@
       selectMes.innerHTML = '';
       meses.forEach(m => selectMes.appendChild(new Option(m, m)));
 
-      // Preenche Datas Exatas
       const datasExatas = [...new Set(dadosFiltrados.map(d => d.dataLabel))].sort((a, b) => {
         const [diaA, mesA, anoA] = a.split('/');
         const [diaB, mesB, anoB] = b.split('/');
@@ -214,7 +208,7 @@
       if (usinas.length > 0 && meses.length > 0) {
         atualizarGrafico();
       } else if (chartInstance) {
-        chartInstance.destroy(); // Limpa o gráfico se não houver dados
+        chartInstance.destroy(); 
       }
     }
 
@@ -239,11 +233,22 @@
       atualizarGrafico();
     }
 
-    // Calcula a variação apenas para SOLAR
+    // NOVA LÓGICA: Adiciona a Unidade (MWh ou kWh) na caixinha preta do Tooltip
     const tooltipVariação = {
       callbacks: {
+        label: function(context) {
+          let label = context.dataset.label || '';
+          if (label) {
+            label += ': ';
+          }
+          if (context.parsed.y !== null) {
+            let unidade = (fonteAtual === 'solar') ? ' MWh' : ' kWh';
+            label += context.parsed.y.toFixed(2) + unidade;
+          }
+          return label;
+        },
         footer: function(tooltipItems) {
-          if (fonteAtual === 'hidro') return ''; // Hidro não mostra porcentagem de meta
+          if (fonteAtual === 'hidro') return ''; 
 
           if (tooltipItems.length >= 2) {
             let real = 0; let pv = 0;
@@ -269,25 +274,25 @@
       if (chartInstance) chartInstance.destroy();
       const ctx = document.getElementById('grafico').getContext('2d');
       let dadosFiltradosDaFonte = obterDadosDaFonte();
+      
+      // Define a unidade dinamicamente para o título do Eixo Y
+      let nomeEixoY = (fonteAtual === 'solar') ? ' MWh' : ' kWh';
 
       if (modoAtual === 'diario') {
-        // --- GRÁFICO DE LINHA ---
         const uSel = document.getElementById('usinaSelect').value;
         const mSel = document.getElementById('mesSelect').value;
         
         let f = dadosFiltradosDaFonte.filter(d => d.usina === uSel && d.mesAno === mSel);
         f.sort((a, b) => a.dataObj - b.dataObj);
 
-        // Constrói os datasets dinamicamente
         let datasets = [{ 
           label: 'Geração Real', 
           data: f.map(d => d.real), 
-          borderColor: fonteAtual === 'solar' ? '#2980b9' : '#27ae60', // Azul pra solar, verde pra hidro
+          borderColor: fonteAtual === 'solar' ? '#2980b9' : '#27ae60', 
           backgroundColor: fonteAtual === 'solar' ? 'rgba(41, 128, 185, 0.15)' : 'rgba(39, 174, 96, 0.15)', 
           borderWidth: 3, pointRadius: 4, fill: true, tension: 0.2 
         }];
 
-        // Só adiciona a linha de PVsyst se for Solar
         if (fonteAtual === 'solar') {
           datasets.push({ 
             label: 'Meta PVsyst', data: f.map(d => d.pvsyst), 
@@ -302,12 +307,11 @@
             responsive: true, maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: { tooltip: tooltipVariação },
-            scales: { y: { beginAtZero: true, title: { display: true, text: fonteAtual === 'solar' ? 'Geração Diária (kWh)' : 'Geração Diária (Ativa G)' } } }
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Diária (' + nomeEixoY.trim() + ')' } } }
           }
         });
 
       } else if (modoAtual === 'comparativo') {
-        // --- GRÁFICO DE BARRAS (1 Dia) ---
         const dataSel = document.getElementById('dataSelect').value;
         let f = dadosFiltradosDaFonte.filter(d => d.dataLabel === dataSel);
         
@@ -330,12 +334,11 @@
               title: { display: true, text: `Comparativo Diário: ${dataSel}`, font: { size: 15 } },
               tooltip: tooltipVariação 
             },
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração do Dia (' + nomeEixoY.trim() + ')' } } }
           }
         });
 
       } else {
-        // --- GRÁFICO DE BARRAS (Acumulados 7/30) ---
         const dias = parseInt(modoAtual);
         const maxDate = new Date(Math.max(...dadosFiltradosDaFonte.map(d => d.dataObj)));
         const dataCorte = new Date(maxDate);
@@ -372,13 +375,12 @@
               title: { display: true, text: `Acumulado ${dias} Dias: ${strCorte} até ${strMax}`, font: { size: 15 } },
               tooltip: tooltipVariação 
             },
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Acumulada (' + nomeEixoY.trim() + ')' } } }
           }
         });
       }
     }
 
-    // Inicia tudo
     document.getElementById('usinaSelect').addEventListener('change', atualizarGrafico);
     document.getElementById('mesSelect').addEventListener('change', atualizarGrafico);
     document.getElementById('dataSelect').addEventListener('change', atualizarGrafico);
