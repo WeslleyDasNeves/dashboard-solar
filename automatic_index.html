@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Centro de Operações de Geração (COG)</title>
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.write('<script src="historico_geracao.js?v=' + new Date().getTime() + '"><\/script>');
+  </script>
+
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #343a40; margin: 0; padding: 30px; }
     .container { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -15,15 +20,10 @@
     .tab-btn:hover { background: #dee2e6; }
     .tab-btn.active { background: #2980b9; color: white; }
     
-    .visao-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+    .visao-tabs { display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; border-bottom: 2px solid #e9ecef; padding-bottom: 15px;}
     .visao-btn { background: white; border: 2px solid #2980b9; color: #2980b9; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 13px;}
     .visao-btn:hover { background: #f4f6f9; }
     .visao-btn.active { background: #2980b9; color: white; }
-
-    .fonte-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e9ecef; padding-bottom: 15px; justify-content: center;}
-    .fonte-btn { background: white; border: 2px solid #34495e; color: #34495e; padding: 10px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 15px;}
-    .fonte-btn:hover { background: #f4f6f9; }
-    .fonte-btn.active { background: #34495e; color: white; }
 
     .controls { display: flex; gap: 20px; align-items: center; margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef; flex-wrap: wrap;}
     .control-group { flex: 1; min-width: 200px; }
@@ -37,17 +37,15 @@
 <body>
   <div class="container">
     
-    <div class="fonte-tabs">
-      <button id="btnFonteSolar" class="fonte-btn active" onclick="mudarFonte('solar')">☀️ Usinas Solares</button>
-      <button id="btnFonteHidro" class="fonte-btn" onclick="mudarFonte('hidro')">💧 Usinas Hidrelétricas</button>
+    <div class="visao-tabs" id="containerVisaoIndividual">
+      <button id="btnVisaoAgrupada" class="visao-btn active" onclick="mudarTipoVisao('agrupada')">🏢 Usinas Agrupadas</button>
+      <button id="btnVisaoIndividual" class="visao-btn" onclick="mudarTipoVisao('individual')">🔎 Usinas Individuais</button>
     </div>
 
     <h2>
-      <span id="tituloPainel">Acompanhamento de Geração x Meta</span>
+      <span id="tituloPainel">Geração x Meta (PVsyst)</span>
       <div class="tabs">
-        
         <button id="btnRealTime" class="tab-btn" style="background: #f39c12; color: white;" onclick="window.open('tempo_real.html', '_blank')">⏱️ Tempo Real (Hoje)</button>
-        
         <button id="btnDiario" class="tab-btn active" onclick="mudarModo('diario')">📈 Evolução do Mês</button>
         <button id="btnComparativo" class="tab-btn" onclick="mudarModo('comparativo')">📊 Comparativo Diário</button>
         <button id="btn7Dias" class="tab-btn" onclick="mudarModo('7')">📅 Acumulado 7 Dias</button>
@@ -55,14 +53,9 @@
       </div>
     </h2>
 
-    <div class="visao-tabs" id="containerVisaoIndividual">
-      <button id="btnVisaoAgrupada" class="visao-btn active" onclick="mudarTipoVisao('agrupada')">🏢 Usinas Agrupadas</button>
-      <button id="btnVisaoIndividual" class="visao-btn" onclick="mudarTipoVisao('individual')">🔎 Usinas Individuais</button>
-    </div>
-    
     <div class="controls">
       <div class="control-group" id="grupoUsina">
-        <label id="labelUsina" for="usinaSelect">Usina:</label>
+        <label id="labelUsina" for="usinaSelect">Usina Agrupada:</label>
         <select id="usinaSelect"><option value="">Carregando dados...</option></select>
       </div>
       <div class="control-group" id="grupoMes">
@@ -82,69 +75,115 @@
   </div>
 
   <script>
+    // ==============================================================
+    // CONFIGURAÇÃO DO PVSYST APENAS PARA OS GRUPOS REAIS (MWh)
+    // ==============================================================
+    const metasPVsystGrupo = {
+      "COLATINA 1": { 3: 541.30, 4: 481.37, 5: 463.89, 6: 434.22 },
+      "COLATINA 2": { 3: 374.25, 4: 336.14, 5: 326.57, 6: 313.62 },
+      "PANCAS":     { 3: 563.75, 4: 503.72, 5: 491.39, 6: 476.70 },
+      "F47":        { 3: 181.21, 4: 158.58, 5: 150.75, 6: 145.57 }
+    };
+
+    // Mapeamento correto para as individuais saberem de onde puxar a meta
+    const mapeamentoGrupos = {
+      "COLATINA 1": { grupo: "COLATINA 1", divisor: 3 },
+      "COLATINA 2": { grupo: "COLATINA 1", divisor: 3 },
+      "COLATINA 3": { grupo: "COLATINA 1", divisor: 3 },
+      "PANCAS 1":   { grupo: "PANCAS",     divisor: 3 },
+      "PANCAS 2":   { grupo: "PANCAS",     divisor: 3 },
+      "PANCAS 3":   { grupo: "PANCAS",     divisor: 3 },
+      "COLATINA 4": { grupo: "COLATINA 2", divisor: 2 },
+      "COLATINA 5": { grupo: "COLATINA 2", divisor: 2 },
+      "F47":        { grupo: "F47",        divisor: 1 }
+    };
+
+    function diasNoMes(mes, ano) {
+      return new Date(ano, mes, 0).getDate();
+    }
+
+    function obterMetaDiariaProporcional(nomeUsinaOriginal, dataObj) {
+      const infoGrupo = mapeamentoGrupos[nomeUsinaOriginal];
+      if (!infoGrupo) return 0;
+      
+      let mes = dataObj.getMonth() + 1;
+      let ano = dataObj.getFullYear();
+      let qtdDias = diasNoMes(mes, ano);
+      
+      if (!metasPVsystGrupo[infoGrupo.grupo] || !metasPVsystGrupo[infoGrupo.grupo][mes]) return 0;
+      
+      let metaMensalDoGrupo = metasPVsystGrupo[infoGrupo.grupo][mes];
+      return (metaMensalDoGrupo / infoGrupo.divisor) / qtdDias;
+    }
+
     let chartInstance = null;
     let dadosGerais = [];
     let modoAtual = 'diario';
     let tipoVisaoAtual = 'agrupada'; 
-    let fonteAtual = 'solar'; 
 
-    async function carregarDadosAutomaticos() {
-      try {
-        const resposta = await fetch('ReportGeracao.csv'); 
-        if (!resposta.ok) throw new Error('Arquivo CSV não encontrado');
-        const textoCSV = await resposta.text();
-        processarCSV(textoCSV);
-      } catch (erro) {
-        console.error("Erro ao ler o CSV:", erro);
-        alert("Erro ao carregar os dados. Certifique-se de que o arquivo 'ReportGeracao.csv' está na mesma pasta.");
+    function processarDadosPython() {
+      if (typeof dadosHistorico === 'undefined') {
+        alert("Erro: Arquivo historico_geracao.js não encontrado ou vazio.");
+        return;
       }
-    }
 
-    function processarCSV(text) {
-      const linhas = text.trim().split(/\r?\n/).slice(1);
       dadosGerais = [];
+      let geracaoAgrupada = {}; 
 
-      linhas.forEach(linha => {
-        const separador = linha.includes(';') ? ';' : ',';
-        const partes = linha.split(separador);
+      // 1. Lança as Individuais e soma a Geração Real (Em MWh) para o Agrupado
+      for (const usina in dadosHistorico) {
+        const infoGrupo = mapeamentoGrupos[usina];
+        const nomeGrupo = infoGrupo ? infoGrupo.grupo : "OUTRAS";
 
-        if (partes.length >= 4) {
-          const dataStr = partes[0].trim();
-          const usina = partes[1].trim();
-          let valReal = parseFloat(partes[2].trim().replace(',', '.'));
-          let valPv = parseFloat(partes[3].trim().replace(',', '.'));
+        if (!geracaoAgrupada[nomeGrupo]) geracaoAgrupada[nomeGrupo] = {};
 
-          if (!isNaN(valReal) && !isNaN(valPv) && dataStr.includes('/')) {
+        for (const dataStr in dadosHistorico[usina]) {
+          // DIVISÃO POR 1000 APLICADA AQUI (Transforma kWh em MWh)
+          let valRealMWh = dadosHistorico[usina][dataStr] / 1000;
+          
+          if (dataStr.includes('/')) {
             const [dia, mes, ano] = dataStr.split('/');
             const dataObj = new Date(ano, mes - 1, dia); 
-            const mesAno = `${mes}/${ano}`;
+            const mesAno = `${parseInt(mes)}/${ano}`;
 
+            const metaPVIndividual = obterMetaDiariaProporcional(usina, dataObj);
+
+            // Injeta o registro Individual
             dadosGerais.push({ 
               dataLabel: dataStr, dataObj: dataObj, mesAno: mesAno, 
-              usina: usina, real: valReal, pvsyst: valPv
+              usina: usina + " (Individual)", real: valRealMWh, pvsyst: metaPVIndividual
             });
+
+            // Soma APENAS a Geração Real no grupo
+            if (!geracaoAgrupada[nomeGrupo][dataStr]) {
+              geracaoAgrupada[nomeGrupo][dataStr] = { real: 0 };
+            }
+            geracaoAgrupada[nomeGrupo][dataStr].real += valRealMWh;
           }
         }
-      });
-      preencherFiltros();
-    }
+      }
 
-    function mudarFonte(fonte) {
-      fonteAtual = fonte;
-      document.getElementById('btnFonteSolar').classList.remove('active');
-      document.getElementById('btnFonteHidro').classList.remove('active');
-      
-      if (fonte === 'solar') {
-        document.getElementById('btnFonteSolar').classList.add('active');
-        document.getElementById('containerVisaoIndividual').style.display = 'flex';
-        document.getElementById('tituloPainel').innerText = "Acompanhamento de Geração x Meta";
-        document.getElementById('btnRealTime').style.display = 'inline-block';
-      } else {
-        document.getElementById('btnFonteHidro').classList.add('active');
-        document.getElementById('containerVisaoIndividual').style.display = 'none';
-        document.getElementById('tituloPainel').innerText = "Geração Histórica (PCH/CGH)";
-        document.getElementById('btnRealTime').style.display = 'none';
-        tipoVisaoAtual = 'agrupada'; 
+      // 2. Injeta os Grupos Agrupados Consolidados com a Reta do PVsyst Blindada
+      for (const grupo in geracaoAgrupada) {
+        for (const dataStr in geracaoAgrupada[grupo]) {
+          const valReal = geracaoAgrupada[grupo][dataStr].real;
+          
+          const [dia, mes, ano] = dataStr.split('/');
+          const dataObj = new Date(ano, mes - 1, dia); 
+          const mesNum = parseInt(mes);
+          const mesAno = `${mesNum}/${ano}`;
+
+          // Calcula a Meta do Grupo DIRETO na fonte, ignorando se alguma usina falhou
+          let qtdDias = diasNoMes(mesNum, ano);
+          let metaDoGrupo = (metasPVsystGrupo[grupo] && metasPVsystGrupo[grupo][mesNum]) 
+                            ? (metasPVsystGrupo[grupo][mesNum] / qtdDias) 
+                            : 0;
+
+          dadosGerais.push({ 
+            dataLabel: dataStr, dataObj: dataObj, mesAno: mesAno, 
+            usina: grupo, real: valReal, pvsyst: metaDoGrupo
+          });
+        }
       }
       preencherFiltros();
     }
@@ -164,24 +203,13 @@
       preencherFiltros();
     }
 
-    function obterDadosDaFonte() {
-      if (fonteAtual === 'hidro') {
-        return dadosGerais.filter(d => d.usina.includes('PCH') || d.usina.includes('CGH'));
-      } else {
-        return dadosGerais.filter(d => !d.usina.includes('PCH') && !d.usina.includes('CGH'));
-      }
-    }
-
     function preencherFiltros() {
-      let dadosFiltrados = obterDadosDaFonte();
-      let usinasFiltradas = dadosFiltrados.map(d => d.usina);
+      let usinasFiltradas = dadosGerais.map(d => d.usina);
       
-      if (fonteAtual === 'solar') {
-        if (tipoVisaoAtual === 'agrupada') {
-          usinasFiltradas = usinasFiltradas.filter(u => !u.includes('(Individual)'));
-        } else {
-          usinasFiltradas = usinasFiltradas.filter(u => u.includes('(Individual)'));
-        }
+      if (tipoVisaoAtual === 'agrupada') {
+        usinasFiltradas = usinasFiltradas.filter(u => !u.includes('(Individual)'));
+      } else {
+        usinasFiltradas = usinasFiltradas.filter(u => u.includes('(Individual)'));
       }
 
       const usinas = [...new Set(usinasFiltradas)].sort();
@@ -189,7 +217,7 @@
       selectUsina.innerHTML = '';
       usinas.forEach(u => selectUsina.appendChild(new Option(u, u)));
 
-      const meses = [...new Set(dadosFiltrados.map(d => d.mesAno))].sort((a, b) => {
+      const meses = [...new Set(dadosGerais.map(d => d.mesAno))].sort((a, b) => {
         const [mesA, anoA] = a.split('/');
         const [mesB, anoB] = b.split('/');
         return new Date(anoA, mesA - 1) - new Date(anoB, mesB - 1);
@@ -198,7 +226,7 @@
       selectMes.innerHTML = '';
       meses.forEach(m => selectMes.appendChild(new Option(m, m)));
 
-      const datasExatas = [...new Set(dadosFiltrados.map(d => d.dataLabel))].sort((a, b) => {
+      const datasExatas = [...new Set(dadosGerais.map(d => d.dataLabel))].sort((a, b) => {
         const [diaA, mesA, anoA] = a.split('/');
         const [diaB, mesB, anoB] = b.split('/');
         return new Date(anoA, mesA - 1, diaA) - new Date(anoB, mesB - 1, diaB);
@@ -217,10 +245,8 @@
 
     function mudarModo(modo) {
       modoAtual = modo;
-      
       const botoes = ['btnDiario', 'btnComparativo', 'btn7Dias', 'btn30Dias'];
       botoes.forEach(b => document.getElementById(b).classList.remove('active'));
-      
       if (modo === 'diario') document.getElementById('btnDiario').classList.add('active');
       if (modo === 'comparativo') document.getElementById('btnComparativo').classList.add('active');
       if (modo === '7') document.getElementById('btn7Dias').classList.add('active');
@@ -229,34 +255,30 @@
       document.getElementById('grupoUsina').style.display = (modo === 'diario') ? 'block' : 'none';
       document.getElementById('grupoMes').style.display = (modo === 'diario') ? 'block' : 'none';
       document.getElementById('grupoDataExata').style.display = (modo === 'comparativo') ? 'block' : 'none';
-
       atualizarGrafico();
     }
 
-    const tooltipVariação = {
+    const tooltipVariacao = {
       callbacks: {
         label: function(context) {
           let label = context.dataset.label || '';
           if (label) label += ': ';
-          if (context.parsed.y !== null) {
-            let unidade = (fonteAtual === 'solar') ? ' MWh' : ' kWh';
-            label += context.parsed.y.toFixed(2) + unidade;
-          }
+          if (context.parsed.y !== null) label += context.parsed.y.toFixed(2) + ' MWh';
           return label;
         },
         footer: function(tooltipItems) {
-          if (fonteAtual === 'hidro') return ''; 
           if (tooltipItems.length >= 2) {
             let real = 0; let pv = 0;
+            // Busca o valor garantindo que é pela legenda, e não pelo índice solto
             tooltipItems.forEach(item => {
-              if (item.datasetIndex === 0) real = item.parsed.y; 
-              if (item.datasetIndex === 1) pv = item.parsed.y;   
+              if (item.dataset.label.includes('Real')) real = item.parsed.y; 
+              if (item.dataset.label.includes('PVsyst')) pv = item.parsed.y;   
             });
             if (pv > 0) {
               const variacao = ((real - pv) / pv) * 100;
               const icone = variacao >= 0 ? '🟢' : '🔴';
               const sinal = variacao > 0 ? '+' : '';
-              return `\n${icone} Desempenho: ${sinal}${variacao.toFixed(2)}%`;
+              return `\n${icone} Desempenho: ${sinal}${variacao.toFixed(2)}% vs PVsyst`;
             }
           }
           return '';
@@ -267,30 +289,27 @@
     function atualizarGrafico() {
       if (chartInstance) chartInstance.destroy();
       const ctx = document.getElementById('grafico').getContext('2d');
-      let dadosFiltradosDaFonte = obterDadosDaFonte();
-      let nomeEixoY = (fonteAtual === 'solar') ? ' MWh' : ' kWh';
+      let nomeEixoY = ' MWh';
 
       if (modoAtual === 'diario') {
         const uSel = document.getElementById('usinaSelect').value;
         const mSel = document.getElementById('mesSelect').value;
         
-        let f = dadosFiltradosDaFonte.filter(d => d.usina === uSel && d.mesAno === mSel);
+        let f = dadosGerais.filter(d => d.usina === uSel && d.mesAno === mSel);
         f.sort((a, b) => a.dataObj - b.dataObj);
 
-        let datasets = [{ 
-          label: 'Geração Real', 
-          data: f.map(d => d.real), 
-          borderColor: fonteAtual === 'solar' ? '#2980b9' : '#27ae60', 
-          backgroundColor: fonteAtual === 'solar' ? 'rgba(41, 128, 185, 0.15)' : 'rgba(39, 174, 96, 0.15)', 
-          borderWidth: 3, pointRadius: 4, fill: true, tension: 0.2 
-        }];
-
-        if (fonteAtual === 'solar') {
-          datasets.push({ 
+        let datasets = [
+          { 
+            label: 'Geração Real', data: f.map(d => d.real), 
+            borderColor: '#2980b9', backgroundColor: 'rgba(41, 128, 185, 0.15)', 
+            borderWidth: 3, pointRadius: 4, fill: true, tension: 0.2 
+          },
+          { 
             label: 'Meta PVsyst', data: f.map(d => d.pvsyst), 
-            borderColor: '#e74c3c', borderWidth: 2, borderDash: [5, 5], pointRadius: 0, fill: false, tension: 0 
-          });
-        }
+            borderColor: '#e74c3c', borderWidth: 2, borderDash: [5, 5], 
+            pointRadius: 0, fill: false, tension: 0 
+          }
+        ];
 
         chartInstance = new Chart(ctx, {
           type: 'line',
@@ -298,23 +317,24 @@
           options: {
             responsive: true, maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
-            plugins: { tooltip: tooltipVariação },
+            plugins: { tooltip: tooltipVariacao },
             scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Diária (' + nomeEixoY.trim() + ')' } } }
           }
         });
 
       } else if (modoAtual === 'comparativo') {
         const dataSel = document.getElementById('dataSelect').value;
-        let f = dadosFiltradosDaFonte.filter(d => d.dataLabel === dataSel);
+        let f = dadosGerais.filter(d => d.dataLabel === dataSel);
         
-        if (fonteAtual === 'solar') {
-          if (tipoVisaoAtual === 'agrupada') f = f.filter(d => !d.usina.includes('(Individual)'));
-          else f = f.filter(d => d.usina.includes('(Individual)'));
-        }
+        if (tipoVisaoAtual === 'agrupada') f = f.filter(u => !u.usina.includes('(Individual)'));
+        else f = f.filter(u => u.usina.includes('(Individual)'));
+        
         f.sort((a, b) => a.usina.localeCompare(b.usina));
 
-        let datasetsBarras = [{ label: 'Realizado', data: f.map(d => d.real.toFixed(2)), backgroundColor: fonteAtual === 'solar' ? '#2980b9' : '#27ae60', borderWidth: 1 }];
-        if (fonteAtual === 'solar') datasetsBarras.push({ label: 'Meta PVsyst', data: f.map(d => d.pvsyst.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 });
+        let datasetsBarras = [
+          { label: 'Realizado', data: f.map(d => d.real.toFixed(2)), backgroundColor: '#2980b9', borderWidth: 1 },
+          { label: 'Meta PVsyst', data: f.map(d => d.pvsyst.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 }
+        ];
 
         chartInstance = new Chart(ctx, {
           type: 'bar',
@@ -324,7 +344,7 @@
             interaction: { mode: 'index', intersect: false }, 
             plugins: { 
               title: { display: true, text: `Comparativo Diário: ${dataSel}`, font: { size: 15 } },
-              tooltip: tooltipVariação 
+              tooltip: tooltipVariacao 
             },
             scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração do Dia (' + nomeEixoY.trim() + ')' } } }
           }
@@ -332,17 +352,17 @@
 
       } else {
         const dias = parseInt(modoAtual);
-        const maxDate = new Date(Math.max(...dadosFiltradosDaFonte.map(d => d.dataObj)));
+        
+        let dadosVisao = dadosGerais;
+        if (tipoVisaoAtual === 'agrupada') dadosVisao = dadosVisao.filter(d => !d.usina.includes('(Individual)'));
+        else dadosVisao = dadosVisao.filter(d => d.usina.includes('(Individual)'));
+
+        const maxDate = new Date(Math.max(...dadosVisao.map(d => d.dataObj)));
         const dataCorte = new Date(maxDate);
         dataCorte.setDate(maxDate.getDate() - dias + 1);
 
-        let dadosRecentes = dadosFiltradosDaFonte.filter(d => d.dataObj >= dataCorte && d.dataObj <= maxDate);
+        let dadosRecentes = dadosVisao.filter(d => d.dataObj >= dataCorte && d.dataObj <= maxDate);
         
-        if (fonteAtual === 'solar') {
-          if (tipoVisaoAtual === 'agrupada') dadosRecentes = dadosRecentes.filter(d => !d.usina.includes('(Individual)'));
-          else dadosRecentes = dadosRecentes.filter(d => d.usina.includes('(Individual)'));
-        }
-
         const soma = {};
         dadosRecentes.forEach(d => {
           if (!soma[d.usina]) soma[d.usina] = { real: 0, pv: 0 };
@@ -354,8 +374,10 @@
         const strCorte = dataCorte.toLocaleDateString('pt-BR');
         const strMax = maxDate.toLocaleDateString('pt-BR');
 
-        let datasetsAcumulados = [{ label: 'Realizado', data: usinasLabels.map(u => soma[u].real.toFixed(2)), backgroundColor: fonteAtual === 'solar' ? '#2980b9' : '#27ae60', borderWidth: 1 }];
-        if (fonteAtual === 'solar') datasetsAcumulados.push({ label: 'Meta PVsyst', data: usinasLabels.map(u => soma[u].pv.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 });
+        let datasetsAcumulados = [
+          { label: 'Realizado', data: usinasLabels.map(u => soma[u].real.toFixed(2)), backgroundColor: '#2980b9', borderWidth: 1 },
+          { label: 'Meta PVsyst', data: usinasLabels.map(u => soma[u].pv.toFixed(2)), backgroundColor: '#95a5a6', borderWidth: 1 }
+        ];
 
         chartInstance = new Chart(ctx, {
           type: 'bar',
@@ -365,7 +387,7 @@
             interaction: { mode: 'index', intersect: false }, 
             plugins: { 
               title: { display: true, text: `Acumulado ${dias} Dias: ${strCorte} até ${strMax}`, font: { size: 15 } },
-              tooltip: tooltipVariação 
+              tooltip: tooltipVariacao 
             },
             scales: { y: { beginAtZero: true, title: { display: true, text: 'Geração Acumulada (' + nomeEixoY.trim() + ')' } } }
           }
@@ -376,7 +398,8 @@
     document.getElementById('usinaSelect').addEventListener('change', atualizarGrafico);
     document.getElementById('mesSelect').addEventListener('change', atualizarGrafico);
     document.getElementById('dataSelect').addEventListener('change', atualizarGrafico);
-    window.onload = carregarDadosAutomaticos;
+    
+    window.onload = processarDadosPython;
   </script>
 </body>
 </html>

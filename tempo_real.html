@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Tempo Real - Visão Global</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  // Carrega o arquivo JS injetando a hora atual no nome para forçar o navegador a não usar o cache!
+  document.write('<script src="tempo_real_.js?v=' + new Date().getTime() + '"><\/script>');
+</script>
+
+  <style>
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      background-color: #f4f6f9; 
+      padding: 10px; /* Reduzido para dar mais espaço aos gráficos */
+      margin: 0; 
+      height: 100vh; /* Força o body a ter exatamente o tamanho da janela */
+      box-sizing: border-box;
+      overflow: hidden; /* Corta a barra de rolagem vertical */
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .header-box { 
+      background: white; 
+      padding: 10px 20px; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+      margin-bottom: 10px;
+      flex-shrink: 0; /* Impede o cabeçalho de ser esmagado */
+    }
+    
+    h2 { 
+      margin: 0; 
+      color: #2c3e50; 
+      font-size: 18px; /* Título levemente menor para ganhar espaço */
+    }
+    
+    /* Configuração da Grade Mosaico que preenche a tela */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Exatas 3 colunas */
+      grid-template-rows: repeat(3, 1fr);    /* Exatas 3 linhas */
+      gap: 10px; /* Espaço menor entre os gráficos */
+      flex-grow: 1; /* Manda a grade ocupar todo o espaço restante da tela */
+      min-height: 0; /* Regra essencial para o grid não vazar da tela */
+    }
+    
+    /* Cartela individual de cada usina */
+    .chart-card {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-top: 4px solid #f39c12;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    
+    .chart-card h3 {
+      margin-top: 0;
+      font-size: 13px; /* Título da usina menor */
+      color: #34495e;
+      text-align: center;
+      margin-bottom: 5px;
+      flex-shrink: 0;
+    }
+
+    .canvas-container { 
+      position: relative; 
+      width: 100%; 
+      flex-grow: 1; /* Manda o gráfico esticar para preencher o cartão */
+      min-height: 0; /* Regra essencial para o Chart.js conseguir encolher */
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="header-box">
+    <h2>⏱️ Visão Global em Tempo Real</h2>
+  </div>
+
+  <div id="chartsContainer" class="grid-container"></div>
+
+  <script>
+    window.onload = function() {
+      const container = document.getElementById('chartsContainer');
+      
+      // Verifica se a variável global 'dadosTR' existe e tem dados
+      if (typeof dadosTR !== 'undefined' && Object.keys(dadosTR).length > 0) {
+        
+        // Passa por cada usina no arquivo
+        Object.keys(dadosTR).forEach((nomeUsina, index) => {
+          
+         
+          const card = document.createElement('div');
+          card.className = 'chart-card';
+
+          
+          const title = document.createElement('h3');
+          title.innerText = nomeUsina;
+          card.appendChild(title);
+
+          
+          const canvasWrapper = document.createElement('div');
+          canvasWrapper.className = 'canvas-container';
+          
+          
+          const canvas = document.createElement('canvas');
+          canvas.id = 'grafico_' + index; // Ex: grafico_0, grafico_1, etc.
+          
+          canvasWrapper.appendChild(canvas);
+          card.appendChild(canvasWrapper);
+          container.appendChild(card);
+
+          
+          gerarGrafico(canvas.id, dadosTR[nomeUsina]);
+        });
+
+      } else {
+        container.innerHTML = '<p style="color:red; font-weight:bold; background:white; padding: 20px;">ERRO: Variável dadosTR não encontrada ou vazia. Verifique o script Python.</p>';
+      }
+    };
+
+    function gerarGrafico(canvasId, dadosUsina) {
+      const ctx = document.getElementById(canvasId).getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dadosUsina.labels, // Horários
+          datasets: [{
+            label: 'Potência Injetada (KW)',
+            data: dadosUsina.valores,
+            borderColor: '#f39c12',
+            backgroundColor: 'rgba(243, 156, 18, 0.15)',
+            borderWidth: 2, // Linha um pouco mais fina
+            pointRadius: 2, // Bolinhas um pouco menores para não poluir
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false } // Oculta a legenda padrão pois o título já diz o que é
+          },
+          scales: {
+            y: { 
+              min: 0,         // Trava o limite inferior em 0
+              max: 1000,      // Trava o limite superior em 1000
+              beginAtZero: true,
+              title: { display: true, text: 'KW', font: {size: 10} }
+            },
+            x: {
+              ticks: { maxTicksLimit: 8 },
+            }
+          }
+        }
+      });
+    }
+  </script>
+<script>
+  // O painel recarrega a tela inteira sozinho a cada 15 minutos (900.000 milissegundos).
+  // Assim ele busca os dados fresquinhos e redesenha a grade de 9 gráficos.
+  setTimeout(function() {
+      window.location.reload(true);
+  }, 300000);
+
+  setInterval(() => {
+    console.log(new Date().toLocaleTimeString());
+}, 300000);
+
+</script>
+</body>
+</html>
